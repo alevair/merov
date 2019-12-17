@@ -1,0 +1,163 @@
+﻿
+.popform {
+    width: 486px;
+    /*height: 280px;*/
+    border: 1px solid #999;
+    margin-top: auto;
+    margin-right: auto;
+    margin-bottom: auto;
+    margin-left: auto;
+    background-color: #FFFFFF;
+    box-shadow: 0px 0px 2px rgba(64, 64, 64, 0.5);
+    z-index: 99999;
+    padding: 0px;
+    font-family: Verdana, Geneva, sans-serif;
+    font-size: 10pt;
+    color: #666;
+    position: fixed;
+    display: none;
+}
+
+    .popform > .listado {
+        display: block;
+        float: none;
+        width: 100%;
+        overflow-y: auto;
+        height: 100%;
+    }
+
+        .popform > .listado > .titulo {
+            align-content: center;
+            border-bottom: 1px solid #bababa;
+            color: #066B80;
+            display: block;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            font-size: 11pt;
+            height: 30px;
+            line-height: 32px;
+            vertical-align: middle;
+            width: 100%;
+        }
+
+            .popform > .listado > .titulo > p {
+                padding-left: 10px;
+                margin: 0px;
+            }
+
+        .popform > .listado > .item {
+            color: #606060;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            font-size: 9pt;
+            overflow: hidden;
+            text-align: left;
+            vertical-align: middle;
+            white-space: nowrap;
+            width: 100%;
+            height: 30px;
+        }
+
+            .popform > .listado > .item:hover {
+                color: var(--but-fore-hover);
+                background-color: var(--but-back-hover);
+                cursor: pointer;
+                font-weight: 600;
+            }
+
+            .popform > .listado > .item:active {
+                color: var(--but-fore-active);
+                background-color: var(--but-back-active);
+                cursor: pointer;
+            }
+
+            .popform > .listado > .item > p {
+                margin: 8px 10px 8px 10px;
+            }
+
+
+        .popform > .listado > .item_des {
+            color: #909090;
+            background-color: #f6f6f6;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            font-size: 9pt;
+            overflow: hidden;
+            text-align: left;
+            vertical-align: middle;
+            white-space: nowrap;
+            width: 100%;
+        }
+
+            .popform > .listado > .item_des > p {
+                margin: 8px 10px 8px 10px;
+            }
+
+            .popform > .listado > .item_des:hover {
+                background-color: #e3e3e3;
+                color: #909090;
+                cursor: pointer;
+                font-weight: 600;
+            }
+
+            .popform > .listado > .item_des:active {
+                background-color: #F28E22;
+                color: #ffffff;
+                cursor: pointer;
+            }
+
+        .popform > .listado > .item_red {
+            color: #E00000;
+            background-color: #f6f6f6;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            font-size: 9pt;
+            overflow: hidden;
+            text-align: left;
+            vertical-align: middle;
+            white-space: nowrap;
+            width: 100%;
+        }
+
+            .popform > .listado > .item_red > p {
+                margin: 8px 10px 8px 10px;
+            }
+
+            .popform > .listado > .item_red:hover {
+                background-color: #e3e3e3;
+                color: #E00000;
+                cursor: pointer;
+                font-weight: 600;
+            }
+
+            .popform > .listado > .item_red:active {
+                background-color: #F28E22;
+                color: #ffffff;
+                cursor: pointer;
+            }
+
+        .popform > .listado > .separador {
+            color: #808080;
+            overflow: hidden;
+            vertical-align: middle;
+            white-space: nowrap;
+            width: 100%;
+            border-bottom: 1px solid #bababa;
+            height: 1px;
+            min-height: 1px;
+            margin: 4px 0px 4px 0px;
+            padding: 0px;
+        }
+
+        .popform > .listado > .sel {
+            background-color: #066b80;
+            color: #ffffff;
+        }
+
+        .popform > .listado > .sel2 {
+            font-weight: 600;
+            background-color: #F28E22;
+            color: #ffffff;
+        }
+
+        .popform > .listado > .sel3 {
+            color: #066B80;
+            background-color: #F0F0F0;
+            font-weight: 600;
+        }

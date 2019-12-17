@@ -1,0 +1,68 @@
+{
+    "controls": [
+        {
+            "name": "formtitle",
+            "clase": "FormTitle",
+            "template": "control-formtitle"
+        },
+        {
+            "name": "button",
+            "clase": "Button",
+            "template": "control-button"
+        },
+        {
+            "name": "butrot",
+            "clase": "Butrot",
+            "template": "control-butrot"
+        },
+        {
+            "name": "appbar",
+            "clase": "Appbar"
+        },
+        {
+            "name": "textsearch",
+            "clase": "TextSearch",
+            "template": "control-textsearch"
+        },
+        {
+            "name": "chip",
+            "clase": "Chip",
+            "template": "control-chip"
+        },
+        {
+            "name": "tab",
+            "clase": "Tab",
+            "templates": {
+                "header": "control-tab",
+                "dinamic": "control-tab-dinamic"
+            }
+        },
+        {
+            "name": "singlegrid",
+            "clase": "SingleGrid",
+            "templates": {
+                "header": "control-singlegrid-header",
+                "row": "control-singlegrid-row",
+                "group": "control-singlegrid-group"
+            }
+        },
+        {
+            "name": "groupgrid",
+            "clase": "GroupGrid"
+        },
+        {
+            "name": "contextmenu",
+            "clase": "ContextMenu",
+            "template": "control-contextmenu"
+        },
+        {
+            "name": "dropbar",
+            "clase": "Dropbar"
+        },
+        {
+            "name": "dropfile",
+            "clase": "Dropfile",
+            "template": "control-dropfile"
+        }
+    ]
+}

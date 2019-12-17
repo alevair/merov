@@ -1,0 +1,73 @@
+﻿.sbox {
+    height: 28px;
+    border: 1px solid #E0E0E0;
+    min-width: 240px;
+    width: 100%;
+    max-width: 640px;
+    padding: 1px 2px;
+    color: #404040;
+    margin: auto 0px;
+    float: left;
+    border-radius: 3px;
+    opacity: 0.8;
+    background-color: #fff;
+    display: flex;
+    transition-duration: 0.2s;
+}
+
+    .sbox:hover {
+        border: 1px solid var(--but-fore-hover); /* #A0A0A0; */
+    }
+
+    .sbox:focus-within {
+        border: 1px solid var(--but-fore-hover);
+        background-color: #ffffff;
+    }
+
+    .sbox input {
+        width: 100%;
+        border: none;
+        margin-left: 2px;
+        background-color: transparent;
+    }
+
+    .sbox .but {
+        color: #404040;
+        padding: 8px 10px 7px 10px;
+        font-size: 9pt;
+        margin: -1px -2px -1px 0px;
+        user-select: none;
+        float: left;
+        display: table;
+        border-radius: 3px;
+    }
+
+        .sbox .but:hover {
+            color:  var(--but-fore-hover);
+            cursor: pointer;
+        }
+
+.sbox .but:active {
+    color: var(--but-fore-active);
+    background-color: var(--but-back-active);
+    cursor: pointer;
+}
+
+.spinloading {
+    animation: sk-scaleout 1.0s infinite ease-in-out;
+}
+
+@keyframes sk-scaleout {
+    0% {
+        background-color: #ffffff;
+    }
+
+    50% {
+        background-color: #B0B0B0;
+        opacity: 0.5;
+    }
+
+    100% {
+        background-color: #ffffff;
+    }
+}

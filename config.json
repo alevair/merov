@@ -1,0 +1,6 @@
+{
+    "boot": "boot.json",
+    "forms": "dat/forms.json",
+    "controls": "dat/controls.json",
+    "ver": "2019.09.09.3"
+}

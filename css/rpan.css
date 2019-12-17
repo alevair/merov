@@ -1,0 +1,86 @@
+﻿.rpandiv {
+    display: table;
+    width: 4px;
+    order: 4;
+    height: 100%;
+    float: left;
+    overflow: hidden;
+    background-color: #E6E6DA;
+    user-select: none;
+}
+
+    .rpandiv:hover {
+        background-color: #066B80;
+        cursor: w-resize;
+    }
+
+.rpan {
+    width: 340px;
+    min-width: 120px;
+    background-color: #ffffff;
+    min-width: 120px;
+    order: 5;
+    display: block;
+    padding: 4px;
+}
+
+.rpanform {
+    display: table;
+    width: 100%;
+    min-width: 120px;
+    background-color: #ffffff;
+    order: 5;
+    font-weight: 100;
+    font-size: 9pt;
+    color: #606060;
+    overflow-y: auto;
+    overflow-x: hidden;
+    height: 100%;
+    float: left;
+    overflow: hidden;
+    padding: 0px 1px;
+}
+
+.rpancont_OLD {
+    background-color: #ffffff;
+    flex: 1 1 0;
+    order: 3;
+    overflow-x: hidden;
+    overflow-y: auto;
+    width: 100%;
+    padding: 4px;
+}
+
+.rpancont {
+    overflow-x: hidden;
+    overflow-y: auto;
+    width: 100%;
+    padding: 0px;
+    height: 100%;
+    margin: 0px;
+}
+
+.rpan_prev {
+    background-color: #FFFFFF;
+    font-family: Arial;
+    font-size: 10pt;
+    color: #383838;
+    width: 100%;
+    height: 100%;
+}
+
+    .rpan_prev .pdfpanel {
+        width: 100%;
+        height: 100%;
+    }
+
+        .rpan_prev .pdfpanel object {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .rpan_prev .pdfpanel .pdfpreview {
+            width: 100%;
+            height: 100%;
+        }

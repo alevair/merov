@@ -1,0 +1,192 @@
+﻿<template id="control-sbox">
+    <div id="{{ide}}" class="sbox">
+        <input id="{{ide}}_input" placeholder="{{placeholder}}" type="text">
+        <p class="but"><i class="fas fa-search"></i></p>
+    </div>
+</template>
+
+<template id="control-formtitle">
+    {{#visible}}
+    {{#enable}}
+    <h1 id="{{id}}">
+        <span>{{title}}</span>
+        {{#showpill}}
+        &nbsp;<span class="pill">{{pill}}</span>
+        {{/showpill}}
+        <span id="{{id}}_men" style="display: block; color:#D00000; margin-top: 6px; font-size: 10pt;"></span>
+    </h1>
+    {{/enable}}
+    {{^enable}}
+    <h1 id="{{id}}" style="color:#A0A0A0">
+        <span>{{title}}</span>
+        {{#showpill}}
+        &nbsp;<span class="pill" style="background-color: #A0A0A0; border: 8px solid #A0A0A0">{{pill}}</span>
+        {{/showpill}}
+        <span id="{{id}}_men" style="display: block; color:#D00000; margin-top: 6px; font-size: 10pt;"></span>
+    </h1>
+    {{/enable}}
+    {{/visible}}
+</template>
+
+<template id="control-button">
+    {{^appbar}}
+    {{#visible}}
+    <div id="{{id}}" class="{{#enable}}button{{/enable}}{{^enable}}button_dis{{/enable}}" title="{{title}}" style="{{#right}}margin-left:auto;{{/right}}">
+        {{#image}}
+        <i class="{{image}}"></i>
+        {{/image}}
+        {{#sep}}<span style="width:8px">&nbsp;</span>{{/sep}}
+        <span id="{{id}}_text">{{text}}</span>
+    </div>
+    {{/visible}}
+    {{/appbar}}
+    {{#appbar}}
+    {{#visible}}
+    <div id="{{id}}" class="{{#enable}}buttonbar{{/enable}}{{^enable}}buttonbar_dis{{/enable}}" title="{{title}}" style="{{#right}}margin-left:auto;{{/right}}">
+        {{#image}}
+        <i class="{{image}}"></i>
+        {{/image}}
+        {{#sep}}<span style="width:8px">&nbsp;</span>{{/sep}}
+        <span id="{{id}}_text">{{text}}</span>
+    </div>
+    {{/visible}}
+    {{/appbar}}
+</template>
+
+<template id="control-textsearch">
+    <div id="{{id}}" class="sbox">
+        <div id="{{id}}_chip" class="tchip" style="display:none"></div>
+        <input id="{{id}}_input" placeholder="{{placeholder}}" type="text">
+        {{#withbutton}}
+        <p id="{{id}}_but" class="but"><i class="fas fa-search"></i></p>
+        {{/withbutton}}
+        <div class="spinner"></div>
+    </div>
+</template>
+
+<template id="control-chip">
+    {{#visible}}
+    {{#enable}}
+    <div id="{{id}}" class="chip" title="{{title}}">{{text}}</div>
+    {{/enable}}
+    {{^enable}}
+    <div id="{{id}}" class="chip_dis" title="{{title}}">{{text}}</div>
+    {{/enable}}
+    {{/visible}}
+</template>
+
+<template id="control-tab">
+    {{#visible}}
+    {{#enable}}
+    <p id="{{id}}" class="header_tab">
+        {{#image}}
+        <i class="{{image}}"></i>
+        {{/image}}
+        {{#text}}
+        <span>{{text}}</span>
+        {{/text}}
+    </p>
+    {{/enable}}
+    {{^enable}}
+    <p id="{{id}}" class="header_tab">
+        {{#image}}
+        <i class="{{image}}"></i>
+        {{/image}}
+        {{#text}}
+        <span>{{text}}</span>
+        {{/text}}
+    </p>
+    {{/enable}}
+    {{/visible}}
+</template>
+
+<template id="control-tab-dinamic">
+    <div id="{{id}}" class="form_body pan_tab">
+    </div>
+</template>
+
+<template id="control-butrot">
+    {{^appbar}}
+    {{#visible}}
+    <div id="{{id}}" class="{{#enable}}button{{/enable}}{{^enable}}button_dis{{/enable}}" title="{{title}}" style="{{#right}}margin-left:auto;{{/right}}">
+        {{#image}}
+        <i class="{{image}}"></i>
+        {{/image}}
+        {{#sep}}<span style="width:8px">&nbsp;</span>{{/sep}}
+        <span>{{text}}</span>
+    </div>
+    {{/visible}}
+    {{/appbar}}
+    {{#appbar}}
+    {{#visible}}
+    <div id="{{id}}" class="{{#enable}}buttonbar{{/enable}}{{^enable}}buttonbar_dis{{/enable}}" title="{{title}}" style="{{#right}}margin-left:auto;{{/right}}">
+        {{#image}}
+        <i class="{{image}}"></i>
+        {{/image}}
+        {{#sep}}<span style="width:8px">&nbsp;</span>{{/sep}}
+        <span>{{text}}</span>
+    </div>
+    {{/visible}}
+    {{/appbar}}
+</template>
+
+<template id="control-singlegrid-header">
+    <div class="renglon cab" style="height:40px">
+        {{#check}}
+        <div class="col_s nomob colcheck" style="width:20px; min-width:20px;"><input id="checkgrid" type="checkbox"></div>
+        {{/check}}
+        {{#campos}}
+        <div class="{{class}}" style="{{style}}">{{text}}</div>
+        {{/campos}}
+        {{#prop}}
+        <div class="col_s nomob" style="width:26px; min-width:26px;"></div>
+        {{/prop}}
+    </div>
+</template>
+<template id="control-singlegrid-row">
+    <div id="{{ide}}" class="renglon_sel{{classren}}">
+        {{#check}}
+        <div class="col_s nomob colcheck" style="width:20px; min-width:20px;"><input id="{{ide}}_chk" type="checkbox"></div>
+        {{/check}}
+        {{#campos}}
+        <div class="{{class}}" style="{{style}}">{{text}}</div>
+        {{/campos}}
+        {{#prop}}
+        <div class="col_s nomob" style="width:26px; min-width:26px;">
+            <div id="{{ide}}_but" title="Más opciones" class="button"><i class="fas fa-ellipsis-h"></i></div>
+        </div>
+        {{/prop}}
+    </div>
+</template>
+<template id="control-singlegrid-group">
+    <div class="linesep">{{text}}</div>
+</template>
+
+<template id="control-dropfile">
+    <div id="{{id}}" dropzone="true" class="dropzone">
+        <div class="title">{{title}}</div>
+        <div class="message">{{description}}</div>
+        <div class="alert">{{alert}}</div>
+        <input id="{{id}}_fileinput" type="file" multiple style="display: none;" />
+    </div>
+</template>
+
+<template id="control-contextmenu">
+    <div id="{{id}}" class="popform" style="{{style}}">
+        <div id="listado" class="listado">
+            {{#options}}
+            {{#sep}}
+            <div id="{{ide}}" class="separador">&nbsp;</div>
+            {{/sep}}
+            {{^sep}}
+            {{#titulo}}
+            <div id="{{ide}}" class="titulo"><p>{{title}}</p></div>
+            {{/titulo}}
+            {{^titulo}}
+        <div id="{{ide}}" class="item{{#sel}} sel3{{/sel}}">{{#sel}}<i class="fas fa-check" style="float:left; padding: 8px"></i>{{/sel}}<p>{{title}}</p></div>
+            {{/titulo}}
+            {{/sep}}
+            {{/options}}
+        </div>
+    </div>
+</template>

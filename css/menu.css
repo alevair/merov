@@ -1,0 +1,162 @@
+﻿@media screen and (max-width: 800px) {
+    .menu {
+        background-color: #f3f3f3;
+        color: #606060;
+        display: block;
+        float: left;
+        font-family: Helvetica;
+        font-weight: 100;
+        height: 100%;
+        margin-right: 2px;
+        min-width: 300px;
+        order: 0;
+        overflow-x: hidden;
+        overflow-y: auto;
+        width: 300px;
+        position: absolute;
+        z-index: 3000;
+    }
+
+        .menu > section > p {
+            font-size: 12pt;
+            font-weight: 600;
+            height: 34px;
+            line-height: 34px;
+            overflow: hidden;
+            padding-left: 10px;
+            white-space: nowrap;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            -webkit-user-select: none;
+            user-select: none;
+            margin: 0px;
+            text-overflow: ellipsis;
+        }
+
+        .menu > section > .sub {
+            font-size: 12pt;
+            height: 34px;
+            line-height: 34px;
+            overflow: hidden;
+            padding-left: 10px;
+            white-space: nowrap;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            -webkit-user-select: none;
+            user-select: none;
+            margin: 0px;
+            color: #067b90;
+            text-overflow: ellipsis;
+        }
+}
+
+@media screen and (min-width: 801px) {
+    .menu {
+        background-color: #f3f3f3;
+        color: #606060;
+        display: block;
+        float: left;
+        font-family: Helvetica;
+        font-weight: 100;
+        height: 100%;
+        margin-right: 2px;
+        min-width: 160px;
+        order: 0;
+        overflow-x: hidden;
+        overflow-y: auto;
+        width: 220px;
+    }
+
+        .menu > section > p {
+            font-size: 10pt;
+            font-weight: 600;
+            height: 32px;
+            line-height: 32px;
+            overflow: hidden;
+            padding-left: 10px;
+            white-space: nowrap;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            -webkit-user-select: none;
+            user-select: none;
+            margin: 0px;
+            text-overflow: ellipsis;
+        }
+
+        .menu > section > .sub {
+            font-size: 11pt;
+            height: 32px;
+            line-height: 32px;
+            overflow: hidden;
+            padding-left: 10px;
+            white-space: nowrap;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            -webkit-user-select: none;
+            user-select: none;
+            margin: 0px;
+            color: #067b90;
+            text-overflow: ellipsis;
+        }
+}
+
+.menu > section > h1 {
+    padding: 10px 0 2px 14px;
+    font-size: 12pt;
+    color: #067b90;
+    font-weight: 100;
+    margin: 0px;
+}
+
+
+.menu > section > p > .img {
+    margin-left: 0px;
+    margin-top: 6px;
+    float: left;
+    margin-right: 8px;
+}
+
+.menu > section > p:hover {
+    color: var(--but-fore-hover); /*#066B80;*/
+    background-color: var(--but-back-hover); /* #e3e3e3;*/
+    cursor: pointer;
+}
+
+.menu > section > p:active {
+    color: var(--but-fore-active); /* #ffffff; */
+    background-color: var(--but-back-active); /* #F28E22; */
+    cursor: pointer;
+}
+
+.menu > section > p > i {
+    font-size: 12pt;
+    margin: 5px 10px 5px 5px;
+}
+
+.menu > section > .sel {
+    color: #066B80;
+    background-color: #D0D6D0;
+    font-weight: 600;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+
+.menu > section > .sub > img {
+    margin-left: 0px;
+    margin-top: 11px;
+    float: right;
+    margin-right: 8px;
+}
+
+.menu > section > .sub:hover {
+    background-color: #e3e3e3;
+    color: #066B80;
+    cursor: pointer;
+}
+
+.menu > section > .sub:active {
+    color: #ffffff;
+    background-color: #F28E22;
+    cursor: pointer;
+}

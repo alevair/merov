@@ -1,0 +1,197 @@
+{
+    "boot": {
+        "libs": [
+            {
+                "tipo": "css",
+                "source": "afont/css/all.css"
+            },
+            {
+                "tipo": "css",
+                "source": "css/templates.css"
+            },
+            {
+                "tipo": "css",
+                "source": "css/estilos.css"
+            },
+            {
+                "tipo": "css",
+                "source": "css/forms.css"
+            },
+            {
+                "tipo": "css",
+                "source": "css/fulls.css"
+            },
+            {
+                "tipo": "css",
+                "source": "css/login.css"
+            },
+            {
+                "tipo": "css",
+                "source": "css/menu.css"
+            },
+            {
+                "tipo": "css",
+                "source": "css/pop.css"
+            },
+            {
+                "tipo": "css",
+                "source": "css/sbox.css"
+            },
+            {
+                "tipo": "css",
+                "source": "css/rpan.css"
+            },
+            {
+                "tipo": "js",
+                "source": "libs/jquery-2.1.3.min.js"
+            },
+            {
+                "tipo": "js",
+                "source": "libs/minify.json.js"
+            },
+            {
+                "tipo": "js",
+                "source": "libs/sha1.js"
+            },
+            {
+                "tipo": "js",
+                "source": "libs/ioaux.js"
+            },
+            {
+                "tipo": "js",
+                "source": "rules/ioserver.js"
+            },
+            {
+                "tipo": "js",
+                "source": "libs/mustache.min.js"
+            },
+            {
+                "tipo": "js",
+                "source": "rules/ioserver.js"
+            },
+            {
+                "tipo": "js",
+                "source": "rules/controls.js"
+            },
+            {
+                "tipo": "js",
+                "source": "rules/base.js"
+            },
+            {
+                "tipo": "js",
+                "source": "rules/forms.js"
+            },
+            {
+                "tipo": "js",
+                "source": "rules/fulls.js"
+            },
+            {
+                "tipo": "js",
+                "source": "rules/menu.js"
+            },
+            {
+                "tipo": "js",
+                "source": "rules/dbox.js"
+            },
+            {
+                "tipo": "js",
+                "source": "cons/basecon.js"
+            },
+            {
+                "tipo": "js",
+                "source": "cons/button.js"
+            },
+            {
+                "tipo": "js",
+                "source": "cons/butrot.js"
+            },
+            {
+                "tipo": "js",
+                "source": "cons/chip.js"
+            },
+            {
+                "tipo": "js",
+                "source": "cons/textsearch.js"
+            },
+            {
+                "tipo": "js",
+                "source": "cons/tab.js"
+            },
+            {
+                "tipo": "js",
+                "source": "cons/singlegrid.js"
+            },
+            {
+                "tipo": "js",
+                "source": "cons/groupgrid.js"
+            },
+            {
+                "tipo": "js",
+                "source": "cons/appbar.js"
+            },
+            {
+                "tipo": "js",
+                "source": "cons/barbutton.js"
+            },
+            {
+                "tipo": "js",
+                "source": "cons/formtitle.js"
+            },
+            {
+                "tipo": "js",
+                "source": "cons/contextmenu.js"
+            },
+            {
+                "tipo": "js",
+                "source": "cons/dropbar.js"
+            },
+            {
+                "tipo": "js",
+                "source": "cons/dropfile.js"
+            },
+            {
+                "tipo": "template",
+                "source": "parts/controls.html"
+            }
+        ],
+        "rules": [
+            {
+                "name": "fulls",
+                "class": "RuleFulls"
+            },
+            {
+                "name": "forms",
+                "class": "RuleForms"
+            },
+            {
+                "name": "menu",
+                "class": "RuleMenu"
+            },
+            {
+                "name": "dbox.wait",
+                "class": "RuleDialogWait"
+            },
+            {
+                "name": "dbox.error",
+                "class": "RuleDialogError"
+            },
+            {
+                "name": "dbox.question",
+                "class": "RuleDialogQuestion"
+            },
+            {
+                "name": "dbox.input",
+                "class": "RuleDialogInput"
+            },
+            {
+                "name": "dbox.info",
+                "class": "RuleDialogInfo"
+            }
+        ],
+        "main": ""
+    },
+    "post": {
+        "libs": [
+        ]
+    }
+}
