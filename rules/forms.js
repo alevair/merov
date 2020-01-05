@@ -2,10 +2,30 @@
     var self = this;
 
     this.document_ready = function () {
-        self.unique = 0;
-        self.forms = [];
         self.idform = "forms_contenedor";
         self.idrpan = "rpan_contenedor";
+
+        self.dat = {
+            forms: [],
+            unique: 0,
+            targets: [
+                {
+                    name: "forms",
+                    cont: "forms_contenedor",
+                    backform: "form_homeusuario"
+                },
+                {
+                    name: "rpan",
+                    cont: "rpan_contenedor",
+                    backform: "form_preview"
+                },
+                {
+                    name: "lpan",
+                    cont: "menu",
+                    backform: "form_menu"
+                }
+            ]
+        };
     };
 
     // Inicia un nuevo formulario, o abre uno existente
@@ -56,7 +76,7 @@
                 idform = "form_" + template.nombre + "_" + pars.id;
             } else {
                 pars.id = -1;
-                idform = "form_" + template.nombre + "_n" + self.unique++;
+                idform = "form_" + template.nombre + "_n" + self.dat.unique++;
             }
         }
         var prev = self.get(idform);
@@ -129,7 +149,7 @@
             visible: false,
             target: pars.target === undefined ? "forms" : pars.target
         };
-        self.forms.push(form);
+        self.dat.forms.push(form);
 
         if (template.instancia === "unica") {
             if (template.global !== undefined) {
@@ -171,8 +191,8 @@
     this.notify = function (action, pars) {
 
 
-        for (let l1 = 0; l1 < self.forms.length; l1++) {
-            let form = self.forms[l1];
+        for (let l1 = 0; l1 < self.dat.forms.length; l1++) {
+            let form = self.dat.forms[l1];
 
             if (isFunc(form.instance.notify)) {
                 form.instance.notify(action, pars);
@@ -211,11 +231,11 @@
             element.remove();
         }
 
-        for (var l1 = 0; l1 < self.forms.length; l1++) {
-            if (self.forms[l1].id === id) {
-                var form = self.forms[l1];
+        for (var l1 = 0; l1 < self.dat.forms.length; l1++) {
+            if (self.dat.forms[l1].id === id) {
+                var form = self.dat.forms[l1];
 
-                self.forms.splice(l1, 1);
+                self.dat.forms.splice(l1, 1);
                 if (form.template.menu === "mostrar") {
                     app.menu.borrarform(form.id);
                 }
@@ -241,12 +261,12 @@
                 self.sh(backformalternative);
                 return backformalternative;
             } else {
-                var name = form.target === "forms" ? "form_homeusuario" : "form_preview";
+                var name = self.gettarget(form.target).backform; // === "forms" ? "form_homeusuario" : "form_preview";
                 if (!self.exists(name)) {
                     name = null;
-                    for (let l1 = 0; l1 < self.forms.length; l1++) {
-                        if (self.forms[l1].target === form.target) {
-                            name = self.forms[l1].id;
+                    for (let l1 = 0; l1 < self.dat.forms.length; l1++) {
+                        if (self.dat.forms[l1].target === form.target) {
+                            name = self.dat.forms[l1].id;
                             break;
                         }
                     }
@@ -260,8 +280,8 @@
     };
 
     this.loading = function (target, fdone) {
-        for (let l1 = 0; l1 < self.forms.length; l1++) {
-            let frm = self.forms[l1];
+        for (let l1 = 0; l1 < self.dat.forms.length; l1++) {
+            let frm = self.dat.forms[l1];
             self.eform(target, frm.id).hide();
         }
 
@@ -276,15 +296,15 @@
 
         var target = "forms";
 
-        for (let l1 = 0; l1 < self.forms.length; l1++) {
-            if (self.forms[l1].id === id) {
-                target = self.forms[l1].target;
+        for (let l1 = 0; l1 < self.dat.forms.length; l1++) {
+            if (self.dat.forms[l1].id === id) {
+                target = self.dat.forms[l1].target;
                 break;
             }
         }
 
-        for (let l1 = 0; l1 < self.forms.length; l1++) {
-            let frm = self.forms[l1];
+        for (let l1 = 0; l1 < self.dat.forms.length; l1++) {
+            let frm = self.dat.forms[l1];
             if (frm.id !== id) {
                 self.eform(target, frm.id).hide();
             }
@@ -307,17 +327,17 @@
     };
 
     this.get = function (id) {
-        for (var l1 = 0; l1 < self.forms.length; l1++) {
-            if (self.forms[l1].id === id) {
-                return self.forms[l1];
+        for (var l1 = 0; l1 < self.dat.forms.length; l1++) {
+            if (self.dat.forms[l1].id === id) {
+                return self.dat.forms[l1];
             }
         }
         return null;
     };
 
     this.index = function (id) {
-        for (var l1 = 0; l1 < self.forms.length; l1++) {
-            if (self.forms[l1].id === id) {
+        for (var l1 = 0; l1 < self.dat.forms.length; l1++) {
+            if (self.dat.forms[l1].id === id) {
                 return l1;
             }
         }
@@ -333,7 +353,19 @@
         }
     };
 
+    this.gettarget = function (name) {
+        for (let l1 = 0; l1 < self.dat.targets.length; l1++) {
+            let tar = self.dat.targets[l1];
+
+            if (tar.name === name) {
+                return tar;
+            }
+        }
+        return null;
+    };
+
     this.eform = function (target, id) {
+        /*
         var idform = self.idform;
 
         switch (target) {
@@ -341,6 +373,8 @@
                 idform = self.idrpan;
                 break;
         }
+        */
+        let idform = self.gettarget(isUndefinedOrEmpty(target) ? "forms" : target).cont;
 
         return RuleBase.eform(idform, id);
     };

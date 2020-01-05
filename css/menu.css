@@ -1,6 +1,5 @@
 ﻿@media screen and (max-width: 800px) {
     .menu {
-        background-color: #f3f3f3;
         color: #606060;
         display: block;
         float: left;
@@ -14,7 +13,10 @@
         overflow-y: auto;
         width: 300px;
         position: absolute;
-        z-index: 3000;
+
+        background-color: #fafafa;
+        box-shadow: 0px 2px 10px 1px rgba(128,128,160,0.3);
+        z-index: 100;
     }
 
         .menu > section > p {
@@ -52,7 +54,6 @@
 
 @media screen and (min-width: 801px) {
     .menu {
-        background-color: #f3f3f3;
         color: #606060;
         display: block;
         float: left;
@@ -65,6 +66,10 @@
         overflow-x: hidden;
         overflow-y: auto;
         width: 220px;
+
+        background-color: #fafafa;
+        box-shadow: 0px 2px 10px 1px rgba(128,128,160,0.3);
+        z-index: 100;
     }
 
         .menu > section > p {
@@ -134,8 +139,8 @@
 }
 
 .menu > section > .sel {
-    color: #066B80;
-    background-color: #D0D6D0;
+    color: var(--but-fore-selected);
+    background-color: var(--but-back-selected);
     font-weight: 600;
     white-space: nowrap;
     text-overflow: ellipsis;
@@ -150,13 +155,13 @@
 }
 
 .menu > section > .sub:hover {
-    background-color: #e3e3e3;
-    color: #066B80;
+    color: var(--but-fore-hover);
+    background-color: var(--but-back-hover);
     cursor: pointer;
 }
 
 .menu > section > .sub:active {
-    color: #ffffff;
-    background-color: #F28E22;
+    color: var(--but-fore-active);
+    background-color: var(--but-back-active);
     cursor: pointer;
 }

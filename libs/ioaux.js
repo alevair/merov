@@ -569,7 +569,7 @@ Date.prototype.isValid = function () {
 };  
 
 function callFunction(func, pars) {
-    if (typeof funcv === 'function') {
+    if (typeof func === 'function') {
         if (isUndefinedOrEmpty(pars)) {
             func();
         } else {

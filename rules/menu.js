@@ -2,7 +2,9 @@
     var self = this;
 
     this.document_ready = function () {
-        self.forms = [];
+        self.dat = {
+            forms: []
+        };
         self.hamb_abierto = true;
     };
 
@@ -45,10 +47,10 @@
             nombre: nombre,
             imagen: imagen
         };
-        self.forms.push(opcion);
+        self.dat.forms.push(opcion);
 
         // Lo agregamos al frontend
-        if (self.forms.length === 1) {
+        if (self.dat.forms.length === 1) {
             $("#menu section").append("<h1 id='menu_opcion_tarea' style='border-bottom: #067b90 solid 1px'></h1>");
         }
 
@@ -60,6 +62,8 @@
             $("#menu section").append(h1);
         }
 
+        self.selop(opcion.menu);
+
         self.eform(opcion.menu).on("click", { idform: idform }, function () {
             self.mclick('form', idform);
         });
@@ -67,23 +71,22 @@
 
     this.borrarform = function (idform) {
         
-        for (var l1 = 0; l1 < self.forms.length; l1++) {
-            var form = self.forms[l1];
+        for (var l1 = 0; l1 < self.dat.forms.length; l1++) {
+            var form = self.dat.forms[l1];
             if (form.idform === idform) {
-                self.forms.splice(l1, 1);
+                self.dat.forms.splice(l1, 1);
 
                 self.eform(form.menu).remove();
                 break;
             }
         }
 
-        if (self.forms.length === 0) {
+        if (self.dat.forms.length === 0) {
             $("#menu_opcion_tarea").remove();
         }
     };
 
     this.preparar = function (opciones, padre = null) {
-
         var ops = [];
         var opcis = isUndefinedOrEmpty(opciones) ? app.dat.menu.opciones : opciones;
 
@@ -239,36 +242,50 @@
                 callFunc(op.action, null);
             }
             if (op.showform !== undefined) {
-                app.forms.open(op.showform, {});
+                app.forms.open(op.showform, { menu: id});
             }
         }
+
+        self.selop("menuop_" + id);
 
         if (window.matchMedia("(max-width: 800px)").matches) {
             self.hide_ham();
         }
     };
 
-    this.form_mostrado = function (idform) {
+    this.selop = function (id) {
+        for (let l1 = 0; l1 < app.dat.menu.opciones.length; l1++) {
+            let op = app.dat.menu.opciones[l1];
+            let ide = "menuop_" + op.id;
+            self.eform(ide).removeClass("sel");
 
-        var form = self.getform(idform);
-        if (form !== null) {
-            $("section p").removeClass("sel");
-            self.eform(form.menu).addClass("sel");
-        } else {
-            // Buscamos entre las opciones de menu. EVALUAR!!
-            $("section p").removeClass("sel");
-
-            for (let l1 = 0; l1 < app.forms.forms.length; l1++) {
-                let form = app.forms.forms[l1];
-                if (form.id === idform) {
-                    for (let l2 = 0; l2 < app.dat.menu.opciones.length; l2++) {
-                        var op = app.dat.menu.opciones[l2];
-
-                        if (form.template.nombre === op.id) {
-                            self.eform("menuop_" + op.id).addClass("sel");
-                        }
-                    }
+            if (op.element === 's') {
+                for (let l2 = 0; l2 < op.opciones.length; l2++) {
+                    let sop = op.opciones[l2];
+                    let ide = "menuop_" + sop.id;
+                    self.eform(ide).removeClass("sel");
                 }
+            }
+        }
+        for (let l1 = 0; l1 < self.dat.forms.length; l1++) {
+            let form = self.dat.forms[l1];
+            self.eform(form.menu).removeClass("sel");
+        }
+
+        if (id !== null) {
+            self.eform(id).addClass("sel");
+        }
+    };
+
+    this.form_mostrado = function (idform) {
+        let form = app.forms.get(idform).instance;
+
+        if (form.pars.menu !== undefined) {
+            self.selop("menuop_" + form.pars.menu);
+        } else {
+            let frm = self.getform(idform);
+            if (frm !== null) {
+                self.selop(frm.menu);
             }
         }
     };
@@ -285,8 +302,8 @@
     };
 
     this.getform = function (idform) {
-        for (var l1 = 0; l1 < self.forms.length; l1++) {
-            var form = self.forms[l1];
+        for (var l1 = 0; l1 < self.dat.forms.length; l1++) {
+            var form = self.dat.forms[l1];
             if (form.idform === idform) {
                 return form;
             }
