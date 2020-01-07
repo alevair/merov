@@ -236,7 +236,7 @@
         var op = self.opcion_por_id(id);
         if (op !== null) {
             if (op.action !== undefined) {
-                callFunc(op.action, null);
+                callFunc(op.action, op);
             }
             if (op.showform !== undefined) {
                 app.forms.open(op.showform, {});

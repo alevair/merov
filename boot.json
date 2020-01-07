@@ -107,6 +107,10 @@
             },
             {
                 "tipo": "js",
+                "source": "cons/link.js"
+            },
+            {
+                "tipo": "js",
                 "source": "cons/chip.js"
             },
             {

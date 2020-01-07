@@ -53,6 +53,12 @@
     {{/appbar}}
 </template>
 
+<template id="control-link">
+    {{#visible}}
+    <a id="{{id}}" class="link">{{text}}</a>
+    {{/visible}}
+</template>
+
 <template id="control-textsearch">
     <div id="{{id}}" class="sbox">
         <div id="{{id}}_chip" class="tchip" style="display:none"></div>

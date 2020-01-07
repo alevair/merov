@@ -86,10 +86,10 @@
         var grp = self.dat.groups[indice];
         grp.open = !grp.open;
         if (grp.open) {
-            self.eform(grp.ide).addClass("naranja");
+            self.eform(grp.ide).addClass("verde");
             self.eform("panel_" + grp.ide).slideToggle(250);
         } else {
-            self.eform(grp.ide).removeClass("naranja");
+            self.eform(grp.ide).removeClass("verde");
             self.eform("panel_" + grp.ide).slideToggle(250);
         }
     };

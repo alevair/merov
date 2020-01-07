@@ -199,7 +199,7 @@
 
     .form_body .renglon > .c1 {
         width: 180px;
-        min-width: 180px;
+        min-width: 120px;
         margin: auto;
     }
 
@@ -211,8 +211,8 @@
 
 
 
-.naranja {
-    background-color: #F28E22 !important;
+.verde {
+    background-color: #34B287 !important;
 }
 
 
@@ -344,8 +344,8 @@
 }
 
 
-.naranja {
-    background-color: #F28E22 !important;
+.verde {
+    background-color: #34B287 !important;
     color: #ffffff !important;
 }
 

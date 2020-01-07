@@ -112,15 +112,15 @@
 
     .chip:hover {
         color: #ffffff;
-        border: 8px solid #FE7609;
-        background-color: #FE7609;
+        border: 8px solid var(--but-fore-hover);
+        background-color: var(--but-fore-hover);
         cursor: pointer;
     }
 
     .chip:active {
-        color: #FE7609;
-        border: 8px solid #FBEE95;
-        background-color: #FBEE95;
+        color: var(--but-fore-hover);
+        border: 8px solid var(--back-active);
+        background-color: var(--back-active);
         cursor: pointer;
     }
 
@@ -195,7 +195,7 @@
 
     .tab_header .sel {
         color: var(--but-fore-active);
-        background-color: var(--but-back-active);
+        background-color: var(--but-back-selected);
     }
 
 

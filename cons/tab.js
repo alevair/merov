@@ -8,7 +8,10 @@
         };
 
         for (let l1 = 0; l1 < self.pars.tabs.length; l1++) {
-            self.pars.tabs[l1].id = "tab_" + self.pars.tabs[l1].ide;
+            let tab = self.pars.tabs[l1];
+            tab.id = "tab_" + tab.ide;
+            tab.panel = tab.panel === undefined ? "pan_" + tab.ide : tab.panel;
+            //self.pars.tabs[l1].id = "tab_" + self.pars.tabs[l1].ide;
         }
     };
 

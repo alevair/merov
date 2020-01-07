@@ -16,6 +16,11 @@
             "template": "control-butrot"
         },
         {
+            "name": "link",
+            "clase": "Link",
+            "template": "control-link"
+        },
+        {
             "name": "appbar",
             "clase": "Appbar"
         },

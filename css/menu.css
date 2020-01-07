@@ -45,7 +45,7 @@
             -webkit-user-select: none;
             user-select: none;
             margin: 0px;
-            color: #067b90;
+            color: var(--fore-active); /*#067b90;*/
             text-overflow: ellipsis;
         }
 }
@@ -95,7 +95,7 @@
             -webkit-user-select: none;
             user-select: none;
             margin: 0px;
-            color: #067b90;
+            color: var(--fore-active); /*#067b90;*/
             text-overflow: ellipsis;
         }
 }
