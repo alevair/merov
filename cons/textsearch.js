@@ -12,7 +12,8 @@
             button: ioaux.setOrDefault(self.pars.button, false),
             placeholder: ioaux.setOrDefault(self.pars.placeholder, ""),
             chip: ioaux.setOrDefault(self.pars.chip, false),
-            prevfilter: ""
+            prevfilter: "",
+            chipborrado: false
         };
     };
 
@@ -42,13 +43,17 @@
                 });
             }
 
+            self.eform(self.pars.ide + "_chip").on("click", function (e) {
+                self.chip({ text: "", filter: "" });
+                self.dat.prevfilter = "";
+            });
+
             self.eform(self.pars.ide + "_input").on("keydown", function (event) {
                 if (self.pars.chip) {
                     if (event.keyCode === 8) {
                         if (self.dat.filter.length === 0) {
                             if (self.dat.prevfilter.length > 0) {
-                                self.chip({ text: "", filter: self.dat.prevfilter });
-                                self.dat.prevfilter = "";
+                                self.dat.chipborrado = true;
                             }
                         }
                     }
@@ -57,7 +62,14 @@
 
             self.eform(self.pars.ide + "_input").on("keyup", function (event) {
                 self.dat.filter = self.eform(self.pars.ide + "_input").val();
-                
+
+                if (self.dat.chipborrado) {
+                    self.chip({ text: "", filter: self.dat.prevfilter });
+                    self.dat.prevfilter = "";
+                    self.dat.chipborrado = false;
+                    return;
+                }
+
                 if (event.keyCode === 27) {
                     self.dat.filter = "";
                     self.eform(self.pars.ide + "_input").val("");
@@ -84,7 +96,7 @@
         }
 
         if (isFunc(self.pars.onselect)) {
-            self.pars.onselect(self);
+            self.pars.onselect(self, self.dat.prevfilter);
         }
     };
 
@@ -114,6 +126,7 @@
         if (pars.filter !== undefined) {
             self.dat.filter = pars.filter;
             self.eform(self.pars.ide + "_input").val(pars.filter);
+            self.eform(self.pars.ide + "_input").select();
         }
     };
 

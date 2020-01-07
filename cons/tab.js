@@ -30,7 +30,7 @@
             let dat = {
                 id: tab.id,
                 enable: self.dat.enable,
-                visible: self.dat.visible,
+                visible: tab.visible !== undefined ? tab.visible : self.dat.visible,
                 image: tab.image,
                 text: tab.text
             };
@@ -70,7 +70,7 @@
         self.eform("tab_" + tab.ide).addClass("sel");
 
         if (isFunc(self.pars.onselect)) {
-            self.pars.onselect(tab.ide);
+            self.pars.onselect(self, tab.ide);
         }
     };
 
