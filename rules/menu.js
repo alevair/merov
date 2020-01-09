@@ -246,7 +246,9 @@
             }
         }
 
-        self.selop("menuop_" + id);
+        if (op.select === true) {
+            self.selop("menuop_" + id);
+        }
 
         if (window.matchMedia("(max-width: 800px)").matches) {
             self.hide_ham();
@@ -254,6 +256,15 @@
     };
 
     this.selop = function (id) {
+
+        self.deselops();
+
+        if (id !== null) {
+            self.eform(id).addClass("sel");
+        }
+    };
+
+    this.deselops = function () {
         for (let l1 = 0; l1 < app.dat.menu.opciones.length; l1++) {
             let op = app.dat.menu.opciones[l1];
             let ide = "menuop_" + op.id;
@@ -271,10 +282,6 @@
             let form = self.dat.forms[l1];
             self.eform(form.menu).removeClass("sel");
         }
-
-        if (id !== null) {
-            self.eform(id).addClass("sel");
-        }
     };
 
     this.form_mostrado = function (idform) {
@@ -284,8 +291,11 @@
             self.selop("menuop_" + form.pars.menu);
         } else {
             let frm = self.getform(idform);
+
             if (frm !== null) {
                 self.selop(frm.menu);
+            } else {
+                self.deselops();
             }
         }
     };

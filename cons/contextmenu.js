@@ -112,7 +112,7 @@
 
             dat.options.push({
                 ide: "item_" + l1,
-                title: self.pars.ops[l1].replace("#",""),
+                title: op.replace("#", ""), // self.pars.ops[l1].replace("#",""),
                 sel: sel,
                 sep: op === "<SEP>",
                 titulo: op.charAt(0) === "#"
