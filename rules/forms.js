@@ -254,11 +254,11 @@
         self.notify("form.closed", { idform: id, instance: form.instance });
 
         if (self.exists(backform, form.target)) {
-            self.sh(backform);
+            self.sh(backform, null, true);
             return backform;
         } else {
             if (self.exists(backformalternative, form.target)) {
-                self.sh(backformalternative);
+                self.sh(backformalternative, null, true);
                 return backformalternative;
             } else {
                 var name = self.gettarget(form.target).backform; // === "forms" ? "form_homeusuario" : "form_preview";
@@ -272,7 +272,7 @@
                     }
                 }
                 if (name !== null) {
-                    self.sh(name);
+                    self.sh(name, null, true);
                 }
                 return name;
             }
@@ -292,7 +292,7 @@
         });
     };
 
-    this.sh = function (id, fdone) {
+    this.sh = function (id, fdone, callshown = false) {
 
         var target = "forms";
 
@@ -321,6 +321,10 @@
 
                 let form = self.get(id);
                 self.notify("form.shown", { idform: id, instance: form.instance });
+
+                if (callshown) {
+                    form.instance.shown(false);
+                }
             });
             app.menu.form_mostrado(id);
         }

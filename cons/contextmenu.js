@@ -19,7 +19,7 @@
         self.mousepopin = false;
 
         self.pars.ops = ioaux.setOrDefault(self.pars.ops, []);
-
+        self.pars.keys = ioaux.setOrDefault(self.pars.keys, []);
 
         self.eform(ide).on("click", function (e) {
 
@@ -58,6 +58,10 @@
 
     this.options = function (options) {
         self.pars.ops = options;
+    };
+
+    this.keys = function (keys) {
+        self.pars.keys = keys;
     };
 
     this.sels = function (sels) {

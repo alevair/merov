@@ -195,7 +195,8 @@
 
     .tab_header .sel {
         color: var(--but-fore-active);
-        background-color: var(--but-back-selected);
+        background-color: var(--but-back-active);
+        font-weight: 600;
     }
 
 
