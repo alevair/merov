@@ -91,4 +91,48 @@
                 ferror(err);
             });
     };
+
+    this.put = function (url, data, fsuccess, ferror) {
+
+        fetch(url, {
+            method: "PUT",
+            body: data,
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            }
+        })
+            .then(response => {
+                return response.json();
+            })
+            .then(data => {
+                fsuccess(data);
+            })
+            .catch(err => {
+                console.log(err);
+                ferror(err);
+            });
+    };
+
+    this.delete = function (url, data, fsuccess, ferror) {
+
+        fetch(url, {
+            method: "DELETE",
+            body: data,
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            }
+        })
+            .then(response => {
+                return response.json();
+            })
+            .then(data => {
+                fsuccess(data);
+            })
+            .catch(err => {
+                console.log(err);
+                ferror(err);
+            });
+    };
 };

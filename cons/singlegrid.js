@@ -63,7 +63,8 @@
             classren: '{{classren}}',
             campos: [],
             prop: self.pars.item.prop,
-            check: true
+            check: true,
+            img: null
         };
 
         for (var l1 = 0; l1 < self.pars.columns.length; l1++) { 

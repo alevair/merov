@@ -7,6 +7,7 @@
         let ide = ioaux.setOrDefault(self.pars.idelem, self.pars.ide);
 
         self.dat = {
+            index: -1,
             idpop: ide + "_popcontext",
             popopen: false,
             mousein: false,
@@ -89,7 +90,7 @@
         let x = self.pars.align === "right" ? rect.right - w : rect.left;
 
         if (isFunc(self.pars.onopen)) {
-            self.pars.onopen(self);
+            self.pars.onopen(self, self.dat.index);
         }
 
         var h = $('#' + self.pars.def.template).html();
@@ -131,6 +132,7 @@
             let op = dat.options[l1];
 
             self.epop(op.ide).on("click", { idx: l1 }, function (e) {
+                self.dat.index = e.data.idx;
                 self.pop_cerrar("sel", e.data.idx);
             });
         }

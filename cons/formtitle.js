@@ -34,6 +34,7 @@
     };
 
     this.setmessage = function (message) {
+        console.log(message);
         self.eform(self.pars.ide + "_men").html(message);
     };
 
