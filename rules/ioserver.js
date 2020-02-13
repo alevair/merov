@@ -37,30 +37,12 @@
         });
     };
 
-    this.get = function (url, fsuccess, ferror) {
+    this.get = function (url, fsuccess, ferror, pars) {
 
-        fetch(url)
-            .then(response => {
-                return response.json();
-            })
-            .then(data => {
-                fsuccess(data);
-            })
-            .catch(err => {
-                console.log(err);
-                ferror(err);
-            });
-    };
-
-    this.post = function (url, data, fsuccess, ferror) {
+        let headers = pars !== undefined ? pars.headers : undefined;
 
         fetch(url, {
-            method: "POST",
-            body: data,
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            }
+            headers: headers
         })
             .then(response => {
                 return response.json();
@@ -74,11 +56,17 @@
             });
     };
 
-    this.postfile = function (url, data, fsuccess, fprogress, ferror) {
+    this.post = function (url, data, fsuccess, ferror, pars) {
+
+        let headers = pars !== undefined ? pars.headers : {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        };
 
         fetch(url, {
             method: "POST",
             body: data,
+            headers: headers
         })
             .then(response => {
                 return response.json();
@@ -92,15 +80,38 @@
             });
     };
 
-    this.put = function (url, data, fsuccess, ferror) {
+    this.postfile = function (url, data, fsuccess, ferror, pars) {
+
+        let headers = pars !== undefined ? pars.headers : undefined;
+
+        fetch(url, {
+            method: "POST",
+            headers: headers,
+            body: data
+        })
+            .then(response => {
+                return response.json();
+            })
+            .then(data => {
+                fsuccess(data);
+            })
+            .catch(err => {
+                console.log(err);
+                ferror(err);
+            });
+    };
+
+    this.put = function (url, data, fsuccess, ferror, pars) {
+
+        let headers = pars !== undefined ? pars.headers : {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        };
 
         fetch(url, {
             method: "PUT",
             body: data,
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            }
+            headers: headers
         })
             .then(response => {
                 return response.json();
@@ -114,15 +125,16 @@
             });
     };
 
-    this.delete = function (url, data, fsuccess, ferror) {
+    this.delete = function (url, data, fsuccess, ferror, pars) {
+        let headers = pars !== undefined ? pars.headers : {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        };
 
         fetch(url, {
             method: "DELETE",
             body: data,
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            }
+            headers: headers
         })
             .then(response => {
                 return response.json();
