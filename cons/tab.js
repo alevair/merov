@@ -61,17 +61,23 @@
             pars.index = self.getindex(pars.id);
         }
 
+        if (self.dat.selected === pars.index) {
+            return;
+        }
+
         let tab = self.pars.tabs[pars.index];
 
         self.eform(".pan_tab").hide();
-        self.eform(tab.panel).fadeIn(200);
-
         self.eform(".header_tab").removeClass("sel");
         self.eform("tab_" + tab.ide).addClass("sel");
 
-        if (isFunc(self.pars.onselect)) {
-            self.pars.onselect(self, tab.ide);
-        }
+        self.eform(tab.panel).fadeIn(200, function () {
+            self.dat.selected = pars.index;
+
+            if (isFunc(self.pars.onselect)) {
+                self.pars.onselect(self, tab.ide);
+            }
+        });
     };
 
     // COMO AGREGO UN NUEVO PANEL??

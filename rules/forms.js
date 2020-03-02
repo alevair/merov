@@ -37,7 +37,7 @@
         }
 
         // Buscamos el template del form
-        var template = app.dat.forms.get(formname);
+        var template = app.dat.forms.get({ name: formname });
         if (template === null) {
             app.dbox.error.sh("Form no encontrado", formname);
             if (isFunc(fdone)) {
@@ -70,13 +70,13 @@
         }
 
         // Establecemos el id del formulario
-        var idform = "form_" + template.nombre;
-        if (template.instancia === "multiple") {
+        var idform = "form_" + template.name;
+        if (template.instance === "multiple") {
             if (pars.id > 0) {
-                idform = "form_" + template.nombre + "_" + pars.id;
+                idform = "form_" + template.name + "_" + pars.id;
             } else {
                 pars.id = -1;
-                idform = "form_" + template.nombre + "_n" + self.dat.unique++;
+                idform = "form_" + template.name + "_n" + self.dat.unique++;
             }
         }
         var prev = self.get(idform);
@@ -93,7 +93,7 @@
 
         // Cargamos el id del formulario entre los parametros
         //pars.idform = idform;
-        var instance = newFunc(template.clase, pars);
+        var instance = newFunc(template.class, pars);
         instance.idform = idform;
         instance.pars.tem = template;
 
@@ -151,7 +151,7 @@
         };
         self.dat.forms.push(form);
 
-        if (template.instancia === "unica") {
+        if (template.instance === "unica") {
             if (template.global !== undefined) {
                 app[template.global] = instance;
             }
@@ -159,10 +159,12 @@
 
         self.loading(form.target, function () {
 
-            ioaux.load_html(template.package.base + template.html + "?ver=" + app.settings.ver, function (html) {
+            let base = template.package !== undefined ? template.package.base : "";
+
+            ioaux.load_html(base + template.html + "?ver=" + app.settings.ver, function (html) {
 
                 if (template.menu === "mostrar") {
-                    app.menu.agregarform(form.id, template.titulo, template.img);
+                    app.menu.agregarform(form.id, template.title, template.img);
                 }
 
                 let clas = template.cssclass !== undefined ? template.cssclass : "form_panel";

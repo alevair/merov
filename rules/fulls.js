@@ -16,7 +16,7 @@
         }
 
         // Buscamos el template del form
-        var template = app.dat.fulls.get(formname);
+        var template = app.dat.fulls.get({ name: formname });
         if (template === null) {
             app.dbox.error.sh("Full no encontrado", formname);
             if (isFunc(fdone)) {
@@ -26,13 +26,13 @@
         }
 
         // Establecemos el id del full
-        var idform = "full_" + template.nombre;
-        if (template.instancia === "multiple") {
+        var idform = "full_" + template.name;
+        if (template.instance === "multiple") {
             if (pars.id > 0) {
-                idform = "form_" + template.nombre + "_" + pars.id;
+                idform = "form_" + template.name + "_" + pars.id;
             } else {
                 pars.id = -1;
-                idform = "form_" + template.nombre + "_n" + self.unique++;
+                idform = "form_" + template.name + "_n" + self.unique++;
             }
         }
         var prev = self.get(idform);
@@ -46,7 +46,7 @@
             return;
         }
 
-        var instance = newFunc(template.clase, pars);
+        var instance = newFunc(template.class, pars);
         instance.idform = idform;
         instance.pars.tem = template;
 
@@ -103,7 +103,7 @@
         };
         self.fulls.push(form);
 
-        if (template.instancia === "unica") {
+        if (template.instance === "unica") {
             if (template.global !== undefined) {
                 app[template.global] = instance;
             }

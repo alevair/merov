@@ -291,10 +291,20 @@
 
                         app.dat.forms = {
                             tems: [],
-                            get: function (name) {
+                            get: function (pars) {
+
+                                console.log(pars);
+
                                 for (let l1 = 0; l1 < app.dat.forms.tems.length; l1++) {
-                                    if (app.dat.forms.tems[l1].nombre === name) {
-                                        return app.dat.forms.tems[l1];
+                                    if (pars.name !== undefined) {
+                                        if (app.dat.forms.tems[l1].name === pars.name) {
+                                            return app.dat.forms.tems[l1];
+                                        }
+                                    }
+                                    if (pars.model !== undefined && pars.type !== undefined) {
+                                        if (app.dat.forms.tems[l1].model === pars.model && app.dat.forms.tems[l1].type === pars.type) {
+                                            return app.dat.forms.tems[l1];
+                                        }                                        
                                     }
                                 }
                                 return null;
@@ -302,10 +312,12 @@
                         };
                         app.dat.fulls = {
                             tems: [],
-                            get: function (name) {
+                            get: function (pars) {
                                 for (let l1 = 0; l1 < app.dat.fulls.tems.length; l1++) {
-                                    if (app.dat.fulls.tems[l1].nombre === name) {
-                                        return app.dat.fulls.tems[l1];
+                                    if (pars.name !== undefined) {
+                                        if (app.dat.fulls.tems[l1].name === pars.name) {
+                                            return app.dat.fulls.tems[l1];
+                                        }
                                     }
                                 }
                                 return null;

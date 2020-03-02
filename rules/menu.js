@@ -87,6 +87,7 @@
     };
 
     this.preparar = function (opciones, padre = null) {
+
         var ops = [];
         var opcis = isUndefinedOrEmpty(opciones) ? app.dat.menu.opciones : opciones;
 

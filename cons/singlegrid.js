@@ -173,7 +173,7 @@
         self.eform(self.pars.item.ide).append(itm);
 
         // Agregamos un evento click a cada fila de la grilla
-        if (isFunc(self.pars.item.onclick.func)) {
+        if (self.pars.item.onclick !== undefined && isFunc(self.pars.item.onclick.func)) {
             self.eform(dat.ide).on("click", { idx: idx }, function (e) {
                 self.pars.item.onclick.func(e.data.idx);
             });
