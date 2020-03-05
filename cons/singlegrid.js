@@ -198,10 +198,22 @@
 
     this.setfilter = function (text) {
         text = text.toLowerCase();
+
+        var pals = text.split(" ");
+
         for (let l1 = 0; l1 < self.dat.data.length; l1++) {
             let dat = self.dat.data[l1];
 
-            if (dat._index.indexOf(text) > -1) {
+            let mostrar = true;
+
+            for (let l2 = 0; l2 < pals.length; l2++) {
+                if (dat._index.indexOf(pals[l2]) === -1) {
+                    mostrar = false;
+                    break;
+                }
+            }
+
+            if (mostrar) {
                 self.eform(dat.ide).show();
             } else {
                 self.eform(dat.ide).hide();
