@@ -55,9 +55,13 @@
 
 <template id="control-link">
     {{#visible}}
-    <a id="{{id}}" class="link" style="display: inline-block; padding: 5px">{{text}}</a>
+    <a id="{{id}}" class="link">{{text}}</a>
     {{/visible}}
 </template>
+
+<!--
+<a id="{{id}}" class="link" style="display: inline-block; padding: 5px">{{text}}</a>
+-->
 
 <template id="control-textsearch">
     <div id="{{id}}" class="sbox">
@@ -194,7 +198,7 @@
             <div id="{{ide}}" class="titulo"><p>{{title}}</p></div>
             {{/titulo}}
             {{^titulo}}
-        <div id="{{ide}}" class="item{{#sel}} sel3{{/sel}}">{{#sel}}<i class="fas fa-check" style="float:left; padding: 8px"></i>{{/sel}}<p>{{title}}</p></div>
+            <div id="{{ide}}" class="item{{#sel}} sel3{{/sel}}">{{#sel}}<i class="fas fa-check" style="float:left; padding: 8px"></i>{{/sel}}<p>{{title}}</p></div>
             {{/titulo}}
             {{/sep}}
             {{/options}}
