@@ -175,12 +175,15 @@
         // Agregamos un evento click a cada fila de la grilla
         if (isFunc(self.pars.item.onclick.func)) {
             self.eform(dat.ide).on("click", { idx: idx }, function (e) {
+                console.log("self.pars.item.onclick.func");
                 self.pars.item.onclick.func(e.data.idx);
+                e.stopPropagation();
             });
 
             let elemcheck = self.eform(dat.ide + "_chk");
             if (elemcheck.length > 0) {
                 elemcheck.on("click", { idx: idx }, function (e) {
+                    console.log("elemcheck.on");
                     e.stopPropagation();
                 });
             }
@@ -189,6 +192,7 @@
             let elemprop = self.eform(dat.ide + "_but");
             if (elemprop.length > 0) {
                 elemprop.on("click", { idx: idx, idelem: dat.ide + "_but" }, function (e) {
+                    console.log("elemprop.on");
                     e.stopPropagation();
                     self.pars.item.onprop.func(e.data.idx, e.data.idelem);
                 });

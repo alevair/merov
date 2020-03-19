@@ -38,7 +38,7 @@
         var prev = self.get(idform);
         if (prev !== null) {
             self.sh(idform, function () {
-                prev.instance.shown(true);
+                prev.instance.shown(false);
                 if (isFunc(fdone)) {
                     callFunc(fdone, null);
                 }
