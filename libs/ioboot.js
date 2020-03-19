@@ -284,17 +284,23 @@
                     
                     ioboot.load_pakres(0, function () {
                         app.dat.menu = {
-                            opciones: []
+                            options: [],
+                            backup: []
                         };
-
-                        //app.dat.menu = app.settings.packages[0].menu;
 
                         app.dat.forms = {
                             tems: [],
-                            get: function (name) {
+                            get: function (pars) {
                                 for (let l1 = 0; l1 < app.dat.forms.tems.length; l1++) {
-                                    if (app.dat.forms.tems[l1].nombre === name) {
-                                        return app.dat.forms.tems[l1];
+                                    if (pars.name !== undefined) {
+                                        if (app.dat.forms.tems[l1].name === pars.name) {
+                                            return app.dat.forms.tems[l1];
+                                        }
+                                    }
+                                    if (pars.model !== undefined && pars.type !== undefined) {
+                                        if (app.dat.forms.tems[l1].model === pars.model && app.dat.forms.tems[l1].type === pars.type) {
+                                            return app.dat.forms.tems[l1];
+                                        }                                        
                                     }
                                 }
                                 return null;
@@ -302,10 +308,12 @@
                         };
                         app.dat.fulls = {
                             tems: [],
-                            get: function (name) {
+                            get: function (pars) {
                                 for (let l1 = 0; l1 < app.dat.fulls.tems.length; l1++) {
-                                    if (app.dat.fulls.tems[l1].nombre === name) {
-                                        return app.dat.fulls.tems[l1];
+                                    if (pars.name !== undefined) {
+                                        if (app.dat.fulls.tems[l1].name === pars.name) {
+                                            return app.dat.fulls.tems[l1];
+                                        }
                                     }
                                 }
                                 return null;
@@ -362,12 +370,12 @@
                             }
 
                             if (pak.menu !== null) {
-                                for (let l2 = 0; l2 < pak.menu.opciones.length; l2++) {
-                                    app.dat.menu.opciones.push(pak.menu.opciones[l2]);
+                                for (let l2 = 0; l2 < pak.menu.options.length; l2++) {
+                                    app.dat.menu.options.push(pak.menu.options[l2]);
+                                    app.dat.menu.backup.push(pak.menu.options[l2]);
                                 }
                             }
                         }
-                        //console.log(app);
 
                         let pak = app.settings.packages[0];
                         var fn = app.settings.main !== undefined ? window[app.settings.main] :  window[pak.boot.main];
@@ -415,7 +423,6 @@
                     // Cargamos recursivamente todos los packages
                     ioboot.init_pak(paks, index + 1, fdone);
                 });
-
             });
 
         };
@@ -486,7 +493,7 @@
                             ioboot.load_pakdef(pak, index + 1, fdone);
                         });
                     } else {
-                        pak.menu = { opciones: [] };
+                        pak.menu = { options: [] };
                         ioboot.load_pakdef(pak, index + 1, fdone);
                     }
                     break;

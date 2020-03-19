@@ -86,9 +86,14 @@
         }
     };
 
-    this.preparar = function (opciones, padre = null) {
+    this.preparar = function (options, padre = null) {
+
         var ops = [];
-        var opcis = isUndefinedOrEmpty(opciones) ? app.dat.menu.opciones : opciones;
+        var opcis = isUndefinedOrEmpty(options) ? app.dat.menu.options : options;
+
+        if (isUndefinedOrEmpty(options)) {
+            $("#menu section").html("");
+        }
 
         for (var l1 = 0; l1 < opcis.length; l1++) {
             var op = opcis[l1];
@@ -104,13 +109,13 @@
 
         for (var l11 = 0; l11 < ops.length; l11++) {
             ops[l11].abierto = !ops[l11].abierto;
-            self.subclick(ops[l11].id);
+            self.subclick(ops[l11].name);
         }
     };
 
     this.preparar_op = function (op, padre) {
         var agregar = false;
-        var ide = "menuop_" + op.id;
+        var ide = "menuop_" + op.name;
 
         if (op.access !== undefined) {
             var access = op.access.split(" ");
@@ -159,8 +164,8 @@
                     h += op.title + '</p>';
                     $("#menu section").append(h);
 
-                    self.eform(ide).on("click", { id: op.id }, function (event) {
-                        self.opclick(event.data.id);
+                    self.eform(ide).on("click", { name: op.name }, function (event) {
+                        self.opclick(event.data.name);
                     });
                     break;
 
@@ -170,11 +175,13 @@
                     h += op.title + '</div>';
                     $("#menu section").append(h);
 
-                    self.eform(ide).on("click", { id: op.id }, function (event) {
-                        self.subclick(event.data.id);
+                    self.eform(ide).on("click", { name: op.name }, function (event) {
+                        self.subclick(event.data.name);
                     });
                     op.subopciones = 0;
-                    self.preparar(op.opciones, op);
+                    if (op.options !== null && op.options.length > 0) {
+                        self.preparar(op.options, op);
+                    }
 
                     if (op.subopciones === 0) {
                         $("#" + ide).hide();
@@ -184,33 +191,33 @@
         }
     };
 
-    this.subclick = function (id) {
-        var op = self.opcion_por_id(id);
+    this.subclick = function (name) {
+        var op = self.opcion_por_name(name);
         if (op !== null) {
             op.abierto = !op.abierto;
-            self.eform("menuop_" + op.id + " i").css("transform", op.abierto ? "rotate(180deg)" : "rotate(0deg)");
+            self.eform("menuop_" + op.name + " i").css("transform", op.abierto ? "rotate(180deg)" : "rotate(0deg)");
 
-            for (var l2 = 0; l2 < op.opciones.length; l2++) {
-                var op1 = op.opciones[l2];
+            for (var l2 = 0; l2 < op.options.length; l2++) {
+                var op1 = op.options[l2];
                 if (op.abierto) {
-                    self.eform("menuop_" + op1.id).show();
+                    self.eform("menuop_" + op1.name).show();
                 } else {
-                    self.eform("menuop_" + op1.id).hide();
+                    self.eform("menuop_" + op1.name).hide();
                 }
             }
         }
     };
 
-    this.opcion_por_id = function (id) {
-        for (var l1 = 0; l1 < app.dat.menu.opciones.length; l1++) {
-            var op = app.dat.menu.opciones[l1];
-            if (op.id === id) {
+    this.opcion_por_name = function (name) {
+        for (var l1 = 0; l1 < app.dat.menu.options.length; l1++) {
+            var op = app.dat.menu.options[l1];
+            if (op.name === name) {
                 return op;
             }
-            if (op.opciones !== undefined) {
-                for (var l2 = 0; l2 < op.opciones.length; l2++) {
-                    if (op.opciones[l2].id === id) {
-                        return op.opciones[l2];
+            if (op.options !== undefined) {
+                for (var l2 = 0; l2 < op.options.length; l2++) {
+                    if (op.options[l2].name === name) {
+                        return op.options[l2];
                     }
                 }
             }
@@ -219,15 +226,15 @@
     };
 
     this.opcion_por_idform = function (idform) {
-        for (var l1 = 0; l1 < app.dat.menu.opciones.length; l1++) {
-            var op = app.dat.menu.opciones[l1];
+        for (var l1 = 0; l1 < app.dat.menu.options.length; l1++) {
+            var op = app.dat.menu.options[l1];
             if (op.idform === idform) {
                 return op;
             }
-            if (op.opciones !== undefined) {
-                for (var l2 = 0; l2 < op.opciones.length; l2++) {
-                    if (op.opciones[l2].idform === idform) {
-                        return op.opciones[l2];
+            if (op.options !== undefined) {
+                for (var l2 = 0; l2 < op.options.length; l2++) {
+                    if (op.options[l2].idform === idform) {
+                        return op.options[l2];
                     }
                 }
             }
@@ -235,19 +242,19 @@
         return null;
     };
 
-    this.opclick = function (id) {
-        var op = self.opcion_por_id(id);
+    this.opclick = function (name) {
+        var op = self.opcion_por_name(name);
         if (op !== null) {
             if (op.action !== undefined) {
                 callFunc(op.action, op);
             }
             if (op.showform !== undefined) {
-                app.forms.open(op.showform, { menu: id});
+                app.forms.open(op.showform, { menu: name});
             }
         }
 
         if (op.select === true) {
-            self.selop("menuop_" + id);
+            self.selop("menuop_" + name);
         }
 
         if (window.matchMedia("(max-width: 800px)").matches) {
@@ -255,25 +262,25 @@
         }
     };
 
-    this.selop = function (id) {
+    this.selop = function (name) {
 
         self.deselops();
 
-        if (id !== null) {
-            self.eform(id).addClass("sel");
+        if (name !== null) {
+            self.eform(name).addClass("sel");
         }
     };
 
     this.deselops = function () {
-        for (let l1 = 0; l1 < app.dat.menu.opciones.length; l1++) {
-            let op = app.dat.menu.opciones[l1];
-            let ide = "menuop_" + op.id;
+        for (let l1 = 0; l1 < app.dat.menu.options.length; l1++) {
+            let op = app.dat.menu.options[l1];
+            let ide = "menuop_" + op.name;
             self.eform(ide).removeClass("sel");
 
             if (op.element === 's') {
-                for (let l2 = 0; l2 < op.opciones.length; l2++) {
-                    let sop = op.opciones[l2];
-                    let ide = "menuop_" + sop.id;
+                for (let l2 = 0; l2 < op.options.length; l2++) {
+                    let sop = op.options[l2];
+                    let ide = "menuop_" + sop.name;
                     self.eform(ide).removeClass("sel");
                 }
             }
