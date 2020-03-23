@@ -151,6 +151,12 @@
         };
         self.dat.forms.push(form);
 
+        var container = self.get(pars.container);
+        if (container !== null) {
+            container.dialog = idform;
+            form.container = container.id;
+        }
+
         if (template.instance === "unica") {
             if (template.global !== undefined) {
                 app[template.global] = instance;
@@ -163,13 +169,12 @@
 
             ioaux.load_html(base + template.html + "?ver=" + app.settings.ver, function (html) {
 
-                if (template.menu === "mostrar") {
+                if (template.menu === "mostrar" && container === null) {
                     app.menu.agregarform(form.id, template.title, template.img);
                 }
 
                 let clas = template.cssclass !== undefined ? template.cssclass : "form_panel";
 
-                /* style="display:none" */
                 var h = '<div class="' + clas + '" id="' + idform + '">' + html + '</div>';
                 self.eform(form.target, null).append(h);
 
@@ -251,6 +256,12 @@
 
         var form = self.get(id);
 
+        if (!isUndefinedOrEmpty(form.container)) {
+            backform = form.container;
+            var cont = self.get(form.container);
+            delete cont.dialog;
+        }
+
         self.destroy(id);
 
         self.notify("form.closed", { idform: id, instance: form.instance });
@@ -313,6 +324,17 @@
         }
 
         self.eform(target, "form_cargando").hide();
+
+
+        let form = self.get(id);
+        if (!isUndefinedOrEmpty(form.dialog)) {
+            id = form.dialog;
+            form = self.get(id);
+
+            if (!isUndefinedOrEmpty(form.dialog)) {
+                id = form.dialog;
+            }
+        }
 
         var fr = self.eform(target, id);
         if (fr.length > 0) {

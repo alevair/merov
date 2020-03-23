@@ -96,7 +96,6 @@
         self.dat.data = data;
 
         self.bindex();
-
         self.shdata();
 
         // Una vez mostrada la lista llamamos al metodo onsuccess

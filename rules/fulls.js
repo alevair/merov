@@ -1,9 +1,12 @@
 ﻿function RuleFulls() {
     var self = this;
 
-    this.document_ready = function () {
+    this.document_ready = function() {
+        self.dat = {
+            fulls: []
+
+        };
         self.unique = 0;
-        self.fulls = [];
         self.idform = "fulls";
     };
 
@@ -101,7 +104,7 @@
             instance: instance,
             visible: false
         };
-        self.fulls.push(form);
+        self.dat.fulls.push(form);
 
         if (template.instance === "unica") {
             if (template.global !== undefined) {
@@ -163,8 +166,8 @@
     };
 
     this.loading = function (fdone) {
-        for (let l1 = 0; l1 < self.fulls.length; l1++) {
-            let frm = self.fulls[l1];
+        for (let l1 = 0; l1 < self.dat.fulls.length; l1++) {
+            let frm = self.dat.fulls[l1];
             self.eform(frm.id).hide();
         }
 
@@ -193,11 +196,11 @@
             element.remove();
         }
 
-        for (var l1 = 0; l1 < self.fulls.length; l1++) {
-            if (self.fulls[l1].id === id) {
-                var form = self.fulls[l1];
+        for (var l1 = 0; l1 < self.dat.fulls.length; l1++) {
+            if (self.dat.fulls[l1].id === id) {
+                var form = self.dat.fulls[l1];
 
-                self.fulls.splice(l1, 1);
+                self.dat.fulls.splice(l1, 1);
                 if (form.template.menu === "mostrar") {
                     app.menu.borrarform(form.id);
                 }
@@ -208,7 +211,7 @@
     };
 
     this.clear = function () {
-        self.fulls = [];
+        self.dat.fulls = [];
         self.eform().html("");
     };
 
@@ -233,9 +236,9 @@
 
     this.sh = function (id, fdone) {
 
-        for (var l1 = 0; l1 < self.fulls.length; l1++) {
-            if (self.fulls[l1].id !== id) {
-                self.eform(self.fulls[l1].id).hide();
+        for (var l1 = 0; l1 < self.dat.fulls.length; l1++) {
+            if (self.dat.fulls[l1].id !== id) {
+                self.eform(self.dat.fulls[l1].id).hide();
             }
         }
 
@@ -259,6 +262,16 @@
         }
     };
 
+    this.notify = function(action, pars) {
+        for (let l1 = 0; l1 < self.dat.fulls.length; l1++) {
+            let full = self.dat.fulls[l1];
+
+            if (isFunc(full.instance.notify)) {
+                full.instance.notify(action, pars);
+            }
+        }
+    };
+
     /*
     this.show = function (id) {
 
@@ -277,17 +290,17 @@
     */
 
     this.get = function (id) {
-        for (var l1 = 0; l1 < self.fulls.length; l1++) {
-            if (self.fulls[l1].id === id) {
-                return self.fulls[l1];
+        for (var l1 = 0; l1 < self.dat.fulls.length; l1++) {
+            if (self.dat.fulls[l1].id === id) {
+                return self.dat.fulls[l1];
             }
         }
         return null;
     };
 
     this.index = function (id) {
-        for (var l1 = 0; l1 < self.fulls.length; l1++) {
-            if (self.fulls[l1].id === id) {
+        for (var l1 = 0; l1 < self.dat.fulls.length; l1++) {
+            if (self.dat.fulls[l1].id === id) {
                 return l1;
             }
         }
