@@ -88,6 +88,11 @@
         return res;
     };
 
+    this.settext = function (text) {
+        self.dat.filter = text;
+        self.eform(self.pars.ide + "_input").val(text);
+    };
+
     this.select = function () {
         if (self.pars.chip) {
             self.chip({ text: self.dat.filter, filter: "" });
