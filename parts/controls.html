@@ -1,4 +1,13 @@
-﻿<template id="control-sbox">
+﻿<template id="control-formmask">
+    <div id="{{idform}}_mask" class="form_mask">
+        <div id="{{idform}}_maskinfo" style="display:none">
+            <div id="{{idform}}_masktext" style="text-align: center;margin: 40px;">Guardando documento...</div>
+            <div class="sbl-circ-ripple"></div>
+        </div>
+    </div>
+</template>
+
+<template id="control-sbox">
     <div id="{{ide}}" class="sbox">
         <input id="{{ide}}_input" placeholder="{{placeholder}}" type="text">
         <p class="but"><i class="fas fa-search"></i></p>
