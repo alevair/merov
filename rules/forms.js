@@ -239,9 +239,9 @@
 
         if (frm !== null) {
             if (val) {
-                self.eform(frm.target, frm.id + "_mask").fadeOut(200);
+                self.eform(frm.target, frm.id + "_mask").fadeOut(100);
             } else {
-                self.eform(frm.target, frm.id + "_mask").fadeIn(200);
+                self.eform(frm.target, frm.id + "_mask").fadeIn(100);
                 if (message !== undefined) {
                     self.eform(frm.target, frm.id + "_masktext").html(message);
                     self.eform(frm.target, frm.id + "_maskinfo").show();
@@ -361,7 +361,7 @@
 
         var fr = self.eform(target, id);
         if (fr.length > 0) {
-            fr.fadeIn(200, function () {
+            fr.fadeIn(100, function () {
                 if (isFunc(fdone)) {
                     fdone();
                 }
