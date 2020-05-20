@@ -151,11 +151,16 @@
             }
 
             var h = "";
-            var text = isUndefinedOrEmpty(op.text) ? op.title : op.text;
+            var text = isUndefinedOrEmpty(op.text) ? isUndefinedOrEmpty(op.title) ? "" : op.title : op.text;
 
             switch (op.element) {
                 case "h1":
                     h += "<h1>" + text + "</h1>";
+                    $("#menu section").append(h);
+                    break;
+
+                case "div":
+                    h += '<h1 style="border-bottom: #067b90 solid 1px;margin-bottom: 10px;"></h1>';
                     $("#menu section").append(h);
                     break;
 
