@@ -131,8 +131,8 @@
             };
         }
         if (instance.enable === undefined) {
-            instance.enable = function (valor) {
-                app.forms.enable(instance.idform, valor);
+            instance.enable = function (valor, message) {
+                app.forms.enable(instance.idform, valor, message);
             };
         }
         if (instance.cons === undefined) {
@@ -178,8 +178,25 @@
                 var h = '<div class="' + clas + '" id="' + idform + '">' + html + '</div>';
                 self.eform(form.target, null).append(h);
 
-                h = '<div id="' + idform + '_mask" class="form_mask"></div>';
+                let th = $('#control-formmask').html();
+                h = Mustache.render(th, { idform: idform });
                 self.eform(form.target, idform).append(h);
+
+
+                //h = '<div id="' + idform + '_mask" class="form_mask"></div>';
+
+                /*
+  <div>
+  <div style="text-align: center;margin: 40px;">Guardando documento...</div>
+  <div class="sbl-circ-ripple"></div>
+  </div>
+                 */
+                //self.eform(form.target, idform).append(h);
+
+
+                // var h = $('#' + self.pars.def.template).html();
+
+
 
                 instance.prepare();
                 self.sh(idform, function () {
@@ -217,14 +234,20 @@
         }
     };
 
-    this.enable = function (id, val) {
+    this.enable = function (id, val, message) {
         var frm = self.get(id);
 
         if (frm !== null) {
             if (val) {
-                self.eform(frm.target, frm.id + "_mask").fadeOut(200);
+                self.eform(frm.target, frm.id + "_mask").fadeOut(100);
             } else {
-                self.eform(frm.target, frm.id + "_mask").fadeIn(200);
+                self.eform(frm.target, frm.id + "_mask").fadeIn(100);
+                if (message !== undefined) {
+                    self.eform(frm.target, frm.id + "_masktext").html(message);
+                    self.eform(frm.target, frm.id + "_maskinfo").show();
+                } else {
+                    self.eform(frm.target, frm.id + "_maskinfo").hide();
+                }
             }
         }
     };
@@ -338,7 +361,7 @@
 
         var fr = self.eform(target, id);
         if (fr.length > 0) {
-            fr.fadeIn(200, function () {
+            fr.fadeIn(100, function () {
                 if (isFunc(fdone)) {
                     fdone();
                 }
