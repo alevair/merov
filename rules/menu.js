@@ -151,17 +151,18 @@
             }
 
             var h = "";
+            var text = isUndefinedOrEmpty(op.text) ? op.title : op.text;
 
             switch (op.element) {
                 case "h1":
-                    h += "<h1>" + op.title + "</h1>";
+                    h += "<h1>" + text + "</h1>";
                     $("#menu section").append(h);
                     break;
 
                 case "p":
                     h += '<p id="' + ide + '" title="' + op.title + '">';
                     h += '<i class="' + op.img + '"></i>';
-                    h += op.title + '</p>';
+                    h += text + '</p>';
                     $("#menu section").append(h);
 
                     self.eform(ide).on("click", { name: op.name }, function (event) {
@@ -172,7 +173,7 @@
                 case "s":
                     h += '<div class="sub" id="' + ide + '" title="' + op.title + '" >';
                     h += '<i class="' + op.img + '" style="float: right; margin: 8px; transition: all 0.4s ease-out 0s;"></i>';
-                    h += op.title + '</div>';
+                    h += text + '</div>';
                     $("#menu section").append(h);
 
                     self.eform(ide).on("click", { name: op.name }, function (event) {
