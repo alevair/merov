@@ -96,7 +96,6 @@
         self.dat.data = data;
 
         self.bindex();
-
         self.shdata();
 
         // Una vez mostrada la lista llamamos al metodo onsuccess
@@ -173,14 +172,17 @@
         self.eform(self.pars.item.ide).append(itm);
 
         // Agregamos un evento click a cada fila de la grilla
-        if (isFunc(self.pars.item.onclick.func)) {
+        if (self.pars.item.onclick !== undefined && isFunc(self.pars.item.onclick.func)) {
             self.eform(dat.ide).on("click", { idx: idx }, function (e) {
+                console.log("self.pars.item.onclick.func");
                 self.pars.item.onclick.func(e.data.idx);
+                e.stopPropagation();
             });
 
             let elemcheck = self.eform(dat.ide + "_chk");
             if (elemcheck.length > 0) {
                 elemcheck.on("click", { idx: idx }, function (e) {
+                    console.log("elemcheck.on");
                     e.stopPropagation();
                 });
             }
@@ -189,6 +191,7 @@
             let elemprop = self.eform(dat.ide + "_but");
             if (elemprop.length > 0) {
                 elemprop.on("click", { idx: idx, idelem: dat.ide + "_but" }, function (e) {
+                    console.log("elemprop.on");
                     e.stopPropagation();
                     self.pars.item.onprop.func(e.data.idx, e.data.idelem);
                 });
@@ -198,10 +201,22 @@
 
     this.setfilter = function (text) {
         text = text.toLowerCase();
+
+        var pals = text.split(" ");
+
         for (let l1 = 0; l1 < self.dat.data.length; l1++) {
             let dat = self.dat.data[l1];
 
-            if (dat._index.indexOf(text) > -1) {
+            let mostrar = true;
+
+            for (let l2 = 0; l2 < pals.length; l2++) {
+                if (dat._index.indexOf(pals[l2]) === -1) {
+                    mostrar = false;
+                    break;
+                }
+            }
+
+            if (mostrar) {
                 self.eform(dat.ide).show();
             } else {
                 self.eform(dat.ide).hide();

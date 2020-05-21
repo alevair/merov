@@ -216,7 +216,7 @@
 }
 
 
-.form_mask {
+.form_mask_old {
     background-color: #F0F0F0;
     height: 100%;
     width: 100%;
@@ -225,6 +225,20 @@
     opacity: 0.7;
     position: fixed;
     top: 0;
+}
+
+.form_mask {
+    background-color: #F0F0F0;
+    height: auto;
+    width: auto;
+    display: block;
+    z-index: 99;
+    opacity: 0.7;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
 }
 
 

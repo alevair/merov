@@ -81,7 +81,8 @@
     }
 
 .buttonbar_dis {
-    background-color: var(--but-back-disable);
+    color: var(--but-fore-disable);
+    /* background-color: var(--but-back-disable); */
     font-size: 10pt;
     height: 38px;
     line-height: 38px;

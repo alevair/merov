@@ -42,6 +42,10 @@
                 "source": "css/rpan.css"
             },
             {
+                "tipo": "css",
+                "source": "libs/json-viewer.css"
+            },
+            {
                 "tipo": "js",
                 "source": "libs/jquery-2.1.3.min.js"
             },
@@ -52,6 +56,10 @@
             {
                 "tipo": "js",
                 "source": "libs/sha1.js"
+            },
+            {
+                "tipo": "js",
+                "source": "libs/json-viewer.js"
             },
             {
                 "tipo": "js",

@@ -37,7 +37,7 @@
         }
 
         // Buscamos el template del form
-        var template = app.dat.forms.get(formname);
+        var template = app.dat.forms.get({ name: formname });
         if (template === null) {
             app.dbox.error.sh("Form no encontrado", formname);
             if (isFunc(fdone)) {
@@ -70,13 +70,13 @@
         }
 
         // Establecemos el id del formulario
-        var idform = "form_" + template.nombre;
-        if (template.instancia === "multiple") {
+        var idform = "form_" + template.name;
+        if (template.instance === "multiple") {
             if (pars.id > 0) {
-                idform = "form_" + template.nombre + "_" + pars.id;
+                idform = "form_" + template.name + "_" + pars.id;
             } else {
                 pars.id = -1;
-                idform = "form_" + template.nombre + "_n" + self.dat.unique++;
+                idform = "form_" + template.name + "_n" + self.dat.unique++;
             }
         }
         var prev = self.get(idform);
@@ -93,7 +93,7 @@
 
         // Cargamos el id del formulario entre los parametros
         //pars.idform = idform;
-        var instance = newFunc(template.clase, pars);
+        var instance = newFunc(template.class, pars);
         instance.idform = idform;
         instance.pars.tem = template;
 
@@ -131,8 +131,8 @@
             };
         }
         if (instance.enable === undefined) {
-            instance.enable = function (valor) {
-                app.forms.enable(instance.idform, valor);
+            instance.enable = function (valor, message) {
+                app.forms.enable(instance.idform, valor, message);
             };
         }
         if (instance.cons === undefined) {
@@ -151,7 +151,13 @@
         };
         self.dat.forms.push(form);
 
-        if (template.instancia === "unica") {
+        var container = self.get(pars.container);
+        if (container !== null) {
+            container.dialog = idform;
+            form.container = container.id;
+        }
+
+        if (template.instance === "unica") {
             if (template.global !== undefined) {
                 app[template.global] = instance;
             }
@@ -159,20 +165,38 @@
 
         self.loading(form.target, function () {
 
-            ioaux.load_html(template.package.base + template.html + "?ver=" + app.settings.ver, function (html) {
+            let base = template.package !== undefined ? template.package.base : "";
 
-                if (template.menu === "mostrar") {
-                    app.menu.agregarform(form.id, template.titulo, template.img);
+            ioaux.load_html(base + template.html + "?ver=" + app.settings.ver, function (html) {
+
+                if (template.menu === "mostrar" && container === null) {
+                    app.menu.agregarform(form.id, template.title, template.img);
                 }
 
                 let clas = template.cssclass !== undefined ? template.cssclass : "form_panel";
 
-                /* style="display:none" */
                 var h = '<div class="' + clas + '" id="' + idform + '">' + html + '</div>';
                 self.eform(form.target, null).append(h);
 
-                h = '<div id="' + idform + '_mask" class="form_mask"></div>';
+                let th = $('#control-formmask').html();
+                h = Mustache.render(th, { idform: idform });
                 self.eform(form.target, idform).append(h);
+
+
+                //h = '<div id="' + idform + '_mask" class="form_mask"></div>';
+
+                /*
+  <div>
+  <div style="text-align: center;margin: 40px;">Guardando documento...</div>
+  <div class="sbl-circ-ripple"></div>
+  </div>
+                 */
+                //self.eform(form.target, idform).append(h);
+
+
+                // var h = $('#' + self.pars.def.template).html();
+
+
 
                 instance.prepare();
                 self.sh(idform, function () {
@@ -210,14 +234,20 @@
         }
     };
 
-    this.enable = function (id, val) {
+    this.enable = function (id, val, message) {
         var frm = self.get(id);
 
         if (frm !== null) {
             if (val) {
-                self.eform(frm.target, frm.id + "_mask").fadeOut(200);
+                self.eform(frm.target, frm.id + "_mask").fadeOut(100);
             } else {
-                self.eform(frm.target, frm.id + "_mask").fadeIn(200);
+                self.eform(frm.target, frm.id + "_mask").fadeIn(100);
+                if (message !== undefined) {
+                    self.eform(frm.target, frm.id + "_masktext").html(message);
+                    self.eform(frm.target, frm.id + "_maskinfo").show();
+                } else {
+                    self.eform(frm.target, frm.id + "_maskinfo").hide();
+                }
             }
         }
     };
@@ -248,6 +278,12 @@
     this.close = function (id, backform, backformalternative) {
 
         var form = self.get(id);
+
+        if (!isUndefinedOrEmpty(form.container)) {
+            backform = form.container;
+            var cont = self.get(form.container);
+            delete cont.dialog;
+        }
 
         self.destroy(id);
 
@@ -312,9 +348,20 @@
 
         self.eform(target, "form_cargando").hide();
 
+
+        let form = self.get(id);
+        if (!isUndefinedOrEmpty(form.dialog)) {
+            id = form.dialog;
+            form = self.get(id);
+
+            if (!isUndefinedOrEmpty(form.dialog)) {
+                id = form.dialog;
+            }
+        }
+
         var fr = self.eform(target, id);
         if (fr.length > 0) {
-            fr.fadeIn(200, function () {
+            fr.fadeIn(100, function () {
                 if (isFunc(fdone)) {
                     fdone();
                 }

@@ -80,6 +80,10 @@
         });
     };
 
+    this.clear = function () {
+
+    };
+
     this.click = function () {
         if (self.dat.enable) {
             if (isFunc(self.pars.onclick)) {

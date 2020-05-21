@@ -58,7 +58,7 @@
         if (con === null) {
             for (var l1 = 0; l1 < self.cons.length; l1++) {
                 var appbar = self.cons[l1];
-                if (appbar.template.name === "appbar") {
+                if (appbar.template.name === "appbar" || appbar.template.name === "dropbar") {
                     for (var l2 = 0; l2 < appbar.instance.cons.length; l2++) {
                         if (appbar.instance.cons[l2].ide === ide) {
                             con = appbar.instance.cons[l2];
