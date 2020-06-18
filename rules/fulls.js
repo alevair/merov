@@ -41,7 +41,7 @@
         var prev = self.get(idform);
         if (prev !== null) {
             self.sh(idform, function () {
-                prev.instance.shown(false);
+                prev.instance.shown(false, pars);
                 if (isFunc(fdone)) {
                     callFunc(fdone, null);
                 }
@@ -125,7 +125,7 @@
 
                 instance.prepare();
                 self.sh(idform, function () {
-                    instance.shown(true);
+                    instance.shown(true, null);
 
                     instance.enable(pars.enable === undefined ? true : pars.enable);
                     if (isFunc(fdone)) {
