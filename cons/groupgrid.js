@@ -25,7 +25,7 @@
 
         for (var l1 = 0; l1 < self.dat.data.length; l1++) {
             let dat = self.dat.data[l1];
-            dat.ide = "item_" + l1;
+            dat.ide = self.pars.ide + "_item_" + l1;
             dat.idxgroup = self.getgroupidx(dat.group);
             self.dat.groups[dat.idxgroup].count++;
 
@@ -62,13 +62,13 @@
 
         for (var l1 = 0; l1 < self.dat.groups.length; l1++) {
             let dat = self.dat.groups[l1];
+            dat.open = false;
+            dat.ide = self.pars.ide + "_grupo_" + dat.anio;
+            dat.count = 0;
 
             let itm = Mustache.render(gr, dat);
             self.eform(self.pars.item.ide).append(itm);
 
-            dat.open = false;
-            dat.ide = "grupo_" + dat.anio;
-            dat.count = 0;
 
             // Agregamos un evento click a cada fila de la grilla
             self.eform(dat.ide).on("click", { idx: l1 }, function (e) {
@@ -154,7 +154,7 @@
 
     this.getgroupidx = function (group) {
         for (var l1 = 0; l1 < self.dat.groups.length; l1++) {
-            if (self.dat.groups[l1].ide ===  "grupo_" + group) {
+            if (self.dat.groups[l1].ide === self.pars.ide + "_grupo_" + group) {
                 return l1;
             }
         }
