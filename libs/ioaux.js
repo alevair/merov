@@ -659,3 +659,12 @@ function downloadJsonFile(data, filename) {
     e.initMouseEvent('click', true, false, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);
     a.dispatchEvent(e);
 }
+
+function downloadFileFromUrl(url) {
+    var e = document.createEvent('MouseEvents');
+    var a = document.createElement('a');
+
+    a.href = url;
+    e.initMouseEvent('click', true, false, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);
+    a.dispatchEvent(e);
+}

@@ -224,6 +224,20 @@
         }
     };
 
+    this.settemplate = function (pars) {
+        // pars.template  - pars.name
+        switch (pars.template) {
+            case "item":
+                self.pars.item.template = pars.name;
+                break;
+        }
+
+        console.log("settemplate");
+        console.log(pars);
+        console.log(self.pars);
+
+    };
+
     this.setgroups = function (groups) {
         self.dat.groups = groups;
     };
