@@ -174,7 +174,6 @@
         // Agregamos un evento click a cada fila de la grilla
         if (self.pars.item.onclick !== undefined && isFunc(self.pars.item.onclick.func)) {
             self.eform(dat.ide).on("click", { idx: idx }, function (e) {
-                console.log("self.pars.item.onclick.func");
                 self.pars.item.onclick.func(e.data.idx);
                 e.stopPropagation();
             });
@@ -182,7 +181,6 @@
             let elemcheck = self.eform(dat.ide + "_chk");
             if (elemcheck.length > 0) {
                 elemcheck.on("click", { idx: idx }, function (e) {
-                    console.log("elemcheck.on");
                     e.stopPropagation();
                 });
             }
@@ -191,7 +189,6 @@
             let elemprop = self.eform(dat.ide + "_but");
             if (elemprop.length > 0) {
                 elemprop.on("click", { idx: idx, idelem: dat.ide + "_but" }, function (e) {
-                    console.log("elemprop.on");
                     e.stopPropagation();
                     self.pars.item.onprop.func(e.data.idx, e.data.idelem);
                 });
@@ -231,11 +228,6 @@
                 self.pars.item.template = pars.name;
                 break;
         }
-
-        console.log("settemplate");
-        console.log(pars);
-        console.log(self.pars);
-
     };
 
     this.setgroups = function (groups) {
@@ -249,53 +241,4 @@
     this.eform = function (id) {
         return RuleBase.eform(self.pars.parent.idform, id);
     };
-
-    /*
-    this.temheader_OLD = function () {
-
-        var h = '<div class="renglon cab" style="height:40px">';
-        for (var l1 = 0; l1 < self.pars.columns.length; l1++) {
-            let col = self.pars.columns[l1];
-
-            let style = 'style="width:' + col.width + ';';
-            style += col.width.indexOf('%') === -1 ? ' min-width:' + col.width + ';' : '';
-            style += '"';
-            let clase = col.class === undefined ? 'class="col_s nomob"' : 'class="' + col.class + '"';
-            let tit = col.title === undefined ? '' : col.title;
-
-            h += '<div ' + clase + ' ' + style + '>' + tit + '</div>';
-        }
-        h += '</div>';
-
-        return h;
-    };
-
-    this.temitem_OLD = function () {
-
-        var h = null;
-        if (self.pars.columns !== undefined && self.pars.columns.length > 0) {
-
-            h = '<div id="{{ide}}" class="renglon_sel">';
-            for (var l1 = 0; l1 < self.pars.columns.length; l1++) {
-                let col = self.pars.columns[l1];
-                let style = 'style="width:' + col.width + ';';
-                style += col.width.indexOf('%') === -1 ? ' min-width:' + col.width + ';' : '';
-                style += '"';
-                let clase = col.class === undefined ? 'class="col_s nomob"' : 'class="' + col.class + '"';
-                let fld = col.field === undefined ? '' : '{{' + col.field + '}}';
-
-                h += '<div ' + clase + ' ' + style + '>' + fld + '</div>';
-            }
-            h += '</div>';
-        } else {
-            h = self.eform(self.pars.item.template).html();
-        }
-
-        return h;
-    };
-
-     
-     */
-
-
 }
