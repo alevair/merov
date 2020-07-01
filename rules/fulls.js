@@ -220,21 +220,21 @@
         self.destroy(id);
 
         if (self.exists(backform)) {
-            self.sh(backform);
+            self.sh(backform, null, true);
             return backform;
         } else {
             if (self.exists(backformalternative)) {
-                self.sh(backformalternative);
+                self.sh(backformalternative, null, true);
                 return backformalternative;
             } else {
-                self.sh("homeusuario");
+                self.sh("homeusuario", null, true);
                 return "homeusuario";
             }
         }
     };
 
 
-    this.sh = function (id, fdone) {
+    this.sh = function (id, fdone, callshown = false) {
 
         for (var l1 = 0; l1 < self.dat.fulls.length; l1++) {
             if (self.dat.fulls[l1].id !== id) {
@@ -255,6 +255,11 @@
                 fr.fadeIn(200, function () {
                     if (isFunc(fdone)) {
                         fdone();
+                    }
+
+                    if (callshown) {
+                        let full = self.get(id);
+                        full.instance.shown(false);
                     }
                 });
                 //app.menu.form_mostrado(id);
