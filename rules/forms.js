@@ -100,6 +100,9 @@
         // Agregamos el manejador de controles del formulario
         instance.controls = new FormControls(instance);
 
+        // Agregamos el manejador de paneles del formulario
+        instance.panels = new FormPanels(instance);
+
         // Llamamos al constructor
         instance.init();
 

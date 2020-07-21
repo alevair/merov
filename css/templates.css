@@ -249,10 +249,12 @@
         color: var(--row-fore-active);
         font-weight: 600;
         transition-duration: 0.2s;
-        /*
-        background-color: #f3f3f3;
-        color: #404040;
-        */
+    }
+
+    .singlegrid .deleted {
+        background-color: var(--row-back-deleted);
+        color: var(--row-fore-deleted);
+        transition-duration: 0.2s;
     }
 
     .singlegrid .panel {

@@ -83,6 +83,10 @@
             },
             {
                 "tipo": "js",
+                "source": "rules/panels.js"
+            },
+            {
+                "tipo": "js",
                 "source": "rules/base.js"
             },
             {
