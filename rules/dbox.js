@@ -159,7 +159,9 @@ function RuleDialogInput() {
         self.eform('mask').fadeIn(0);
         self.eform('mask').fadeTo(0, 0.3);
 
-        self.eform('dinput').fadeIn(200);
+        self.eform('dinput').fadeIn(200, function () {
+            self.eform("dinput_text").focus();
+        });
     };
 
     this.aceptar = function () {

@@ -254,6 +254,10 @@ function shortTimeString(datetime, posttext = '') {
     return zeroPad(datetime.getHours(), 2) + ":" + zeroPad(datetime.getMinutes(), 2) + posttext;
 }
 
+function shortDateString(datetime) {
+    return datetime.toLocaleDateString();
+};
+
 // Convierte una fecha en formato json en una fecha corta
 function jsonDateToShortDateString(jsonDateString) {
     if (isUndefinedOrEmpty(jsonDateString)) {

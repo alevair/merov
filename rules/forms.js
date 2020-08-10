@@ -203,9 +203,10 @@
 
                 instance.prepare();
                 self.sh(idform, function () {
+                    instance.enable(pars.enable === undefined ? true : pars.enable);
+
                     instance.shown(true, null);
 
-                    instance.enable(pars.enable === undefined ? true : pars.enable);
                     if (isFunc(fdone)) {
                         callFunc(fdone, null);
                     }
@@ -244,7 +245,7 @@
             if (val) {
                 self.eform(frm.target, frm.id + "_mask").fadeOut(100);
             } else {
-                self.eform(frm.target, frm.id + "_mask").fadeIn(100);
+                self.eform(frm.target, frm.id + "_mask").show(); // .fadeIn(100);
                 if (message !== undefined) {
                     self.eform(frm.target, frm.id + "_masktext").html(message);
                     self.eform(frm.target, frm.id + "_maskinfo").show();
