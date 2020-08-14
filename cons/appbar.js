@@ -66,6 +66,7 @@
             case "textsearch":
             case "activesearch":
             case "singlesearch":
+            case "inputmodelfilter":
                 h = '<input ' + ideh + ' class="form_textbox" ' + placeholder_h + ' type="text">';
                 break;
         }
