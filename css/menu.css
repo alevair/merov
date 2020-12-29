@@ -113,6 +113,15 @@
     margin: 0px;
 }
 
+.menu > section > h2 {
+    padding: 10px 0 2px 14px;
+    font-size: 12pt;
+    color: #067b90;
+    font-weight: 100;
+    margin: 0px;
+    border-bottom: 1px solid #B0C0C0;
+}
+
 
 .menu > section > p > .img {
     margin-left: 0px;

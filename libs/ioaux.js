@@ -309,7 +309,8 @@ function jsonDateToShortDateTimeString(jsonDateString) {
         return "-";
     } else {
         var dat = jsonDateString.substring(8, 10) + "/" + jsonDateString.substring(5, 7) + "/" + jsonDateString.substring(0, 4);
-        var tim = jsonDateString.substring(11, 13) + ":" + jsonDateString.substring(14, 16) + ":" + jsonDateString.substring(17, 19) + " hs";
+        //var tim = jsonDateString.substring(11, 13) + ":" + jsonDateString.substring(14, 16) + ":" + jsonDateString.substring(17, 19) + " hs";
+        var tim = jsonDateString.substring(11, 13) + ":" + jsonDateString.substring(14, 16) + "hs";
         return dat + " - " + tim;
     }
 }
@@ -671,4 +672,48 @@ function downloadFileFromUrl(url) {
     a.href = url;
     e.initMouseEvent('click', true, false, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);
     a.dispatchEvent(e);
+}
+
+
+function downloadCSV(data, filename) {
+    var encodedUri = encodeURI(data);
+    var link = document.createElement("a");
+    link.setAttribute("href", encodedUri);
+    link.setAttribute("download", filename);
+    document.body.appendChild(link); // Required for FF
+
+    link.click(); // This will download the data file named "my_data.csv".
+}
+
+
+function convertToCSV(objArray) {
+
+    console.log(objArray);
+
+    var array = typeof objArray != 'object' ? JSON.parse(objArray) : objArray;
+    var str = '';
+
+
+    //for (var l1 = 0; l1 < objArray.length; l1++) {
+
+    //}
+
+
+    console.log(array);
+
+    for (var i = 0; i < array.length; i++) {
+        var line = '';
+        for (var index in array[i]) {
+            if (line != '') line += ',';
+
+            line += array[i][index];
+            //console.log("line: " + line);
+        }
+
+        str += line + '\r\n';
+    }
+
+    console.log(str);
+
+    return str;
 }

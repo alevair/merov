@@ -218,7 +218,6 @@
 
     this.notify = function (action, pars) {
 
-
         for (let l1 = 0; l1 < self.dat.forms.length; l1++) {
             let form = self.dat.forms[l1];
 

@@ -3,7 +3,8 @@
 
     this.document_ready = function () {
         self.dat = {
-            forms: []
+            forms: [],
+            target: "menu"
         };
         self.hamb_abierto = true;
     };
@@ -51,15 +52,15 @@
 
         // Lo agregamos al frontend
         if (self.dat.forms.length === 1) {
-            $("#menu section").append("<h1 id='menu_opcion_tarea' style='border-bottom: #067b90 solid 1px'></h1>");
+            $("#menu .menu").append("<h1 id='menu_opcion_tarea' style='border-bottom: #067b90 solid 1px'></h1>");
         }
 
         if (imagen === null) {
             var h = '<p id="' + opcion.menu + '" >' + nombre + '</p>';
-            $("#menu section").append(h);
+            $("#menu .menu").append(h);
         } else {
             var h1 = '<p id="' + opcion.menu + '" ><i class="' + imagen + '"></i>' + nombre + '</p>';
-            $("#menu section").append(h1);
+            $("#menu .menu").append(h1);
         }
 
         self.selop(opcion.menu);
@@ -92,7 +93,8 @@
         var opcis = isUndefinedOrEmpty(options) ? app.dat.menu.options : options;
 
         if (isUndefinedOrEmpty(options)) {
-            $("#menu section").html("");
+            $("#menu .menu").html("");
+            $("#menu .config").html("");
         }
 
         for (var l1 = 0; l1 < opcis.length; l1++) {
@@ -150,25 +152,32 @@
                 padre.subopciones++;
             }
 
+            var target = isUndefinedOrEmpty(op.target) ? "#menu .menu" : op.target === "config" ? "#menu .config" : "#menu .menu";
+
             var h = "";
             var text = isUndefinedOrEmpty(op.text) ? isUndefinedOrEmpty(op.title) ? "" : op.title : op.text;
 
             switch (op.element) {
                 case "h1":
                     h += "<h1>" + text + "</h1>";
-                    $("#menu section").append(h);
+                    $(target).append(h);
+                    break;
+
+                case "h2":
+                    h += "<h2>" + text + "</h2>";
+                    $(target).append(h);
                     break;
 
                 case "div":
                     h += '<h1 style="border-bottom: #067b90 solid 1px;margin-bottom: 10px;"></h1>';
-                    $("#menu section").append(h);
+                    $(target).append(h);
                     break;
 
                 case "p":
                     h += '<p id="' + ide + '" title="' + op.title + '">';
                     h += '<i class="' + op.img + '"></i>';
                     h += text + '</p>';
-                    $("#menu section").append(h);
+                    $(target).append(h);
 
                     self.eform(ide).on("click", { name: op.name }, function (event) {
                         self.opclick(event.data.name);
@@ -179,7 +188,7 @@
                     h += '<div class="sub" id="' + ide + '" title="' + op.title + '" >';
                     h += '<i class="' + op.img + '" style="float: right; margin: 8px; transition: all 0.4s ease-out 0s;"></i>';
                     h += text + '</div>';
-                    $("#menu section").append(h);
+                    $(target).append(h);
 
                     self.eform(ide).on("click", { name: op.name }, function (event) {
                         self.subclick(event.data.name);
@@ -211,6 +220,19 @@
                     self.eform("menuop_" + op1.name).hide();
                 }
             }
+        }
+    };
+
+    this.togglemenu = function () {
+
+        if (self.dat.target === "menu") {
+            $("#menu .menu").hide();
+            $("#menu .config").fadeIn(100);
+            self.dat.target = "config";
+        } else {
+            $("#menu .menu").fadeIn(100);
+            $("#menu .config").hide();
+            self.dat.target = "menu";
         }
     };
 
@@ -249,6 +271,7 @@
     };
 
     this.opclick = function (name) {
+
         var op = self.opcion_por_name(name);
         if (op !== null) {
             if (op.action !== undefined) {
@@ -262,7 +285,6 @@
         if (op.select === true) {
             self.selop("menuop_" + name);
         }
-
         if (window.matchMedia("(max-width: 800px)").matches) {
             self.hide_ham();
         }
@@ -336,6 +358,7 @@
 
     // Retorna elementos dentro del form con el ID indicado
     this.eform = function (id) {
-        return $('section #' + id);
+        //return $('section #' + id);
+        return $('#menu #' + id);
     };
 }
