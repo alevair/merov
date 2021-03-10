@@ -56,6 +56,27 @@
             });
     };
 
+    this.getraw = function (url, fsuccess, ferror, pars) {
+
+        let headers = pars !== undefined ? pars.headers : undefined;
+
+        fetch(url, {
+            headers: headers
+        })
+            .then(response => {
+                return response.arrayBuffer();
+            })
+            .then(data => {
+                var arraydata = new Uint8Array(data);
+
+                fsuccess(arraydata);
+            })
+            .catch(err => {
+                console.log(err);
+                ferror(err);
+            });
+    };
+
     this.post = function (url, data, fsuccess, ferror, pars) {
 
         let headers = pars !== undefined ? pars.headers : {

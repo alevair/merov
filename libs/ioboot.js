@@ -31,7 +31,8 @@
         progressbar.value = Math.round(progress);
 
         var lib = elem.libs[index];
-        var surl = elem.base + lib.source + "?ver=" + app.settings.ver;
+        var surl = lib.source.includes("http") ? lib.source : elem.base + lib.source;
+        surl += "?ver=" + app.settings.ver;
 
         switch (lib.tipo) {
             case "js":
