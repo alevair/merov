@@ -68,6 +68,9 @@
         if (instance.shown === undefined) {
             instance.shown = function () { };
         }
+        if (instance.notify === undefined) {
+            instance.notify = function (action, pars) { };
+        }
         if (instance.eform === undefined) {
             instance.eform = function (id) {
                 return RuleBase.eform(instance.idform, id);
@@ -272,9 +275,9 @@
         for (let l1 = 0; l1 < self.dat.fulls.length; l1++) {
             let full = self.dat.fulls[l1];
 
-            if (isFunc(full.instance.notify)) {
+            //if (isFunc(full.instance.notify)) {
                 full.instance.notify(action, pars);
-            }
+            //}
         }
     };
 

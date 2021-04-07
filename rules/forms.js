@@ -115,6 +115,9 @@
         if (instance.shown === undefined) {
             instance.shown = function () { };
         }
+        if (instance.notify === undefined) {
+            instance.notify = function (action, pars) { };
+        }
         if (instance.eform === undefined) {
             instance.eform = function (id) {
                 return RuleBase.eform(instance.idform, id);
@@ -223,9 +226,9 @@
         for (let l1 = 0; l1 < self.dat.forms.length; l1++) {
             let form = self.dat.forms[l1];
 
-            if (isFunc(form.instance.notify)) {
+            //if (isFunc(form.instance.notify)) {
                 form.instance.notify(action, pars);
-            }
+            //}
         }
 
         for (let l1 = 0; l1 < app.rules.length; l1++) {
@@ -236,6 +239,10 @@
                     rule.notify(action, pars);
                 }
             }
+        }
+
+        if (app.fulls !== undefined) {
+            app.fulls.notify(action, pars);
         }
     };
 
