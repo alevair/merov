@@ -57,7 +57,9 @@
         instance.controls = new FormControls(instance);
 
         // Llamamos al constructor
-        instance.init();
+        if (instance.init === undefined) {
+            instance.init();
+        }
 
         // Agregamos algunos metodos basicos, si es que no estan agregados en la clase
         if (instance.prepare === undefined) {
@@ -134,11 +136,9 @@
                     //self.notify("form.shown", { idform: idform, instance: instance });
                 });
             });
-
-
         });
 
-
+        /*
         return;
 
 
@@ -163,6 +163,7 @@
                 });
             });
         });
+        */
     };
 
     this.loading = function (fdone) {

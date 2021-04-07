@@ -175,7 +175,7 @@
 
                 case "p":
                     h += '<p id="' + ide + '" title="' + op.title + '">';
-                    h += '<i class="' + op.img + '"></i>';
+                    h += '<i class="' + op.icon + '"></i>';
                     h += text + '</p>';
                     $(target).append(h);
 
@@ -186,7 +186,7 @@
 
                 case "s":
                     h += '<div class="sub" id="' + ide + '" title="' + op.title + '" >';
-                    h += '<i class="' + op.img + '" style="float: right; margin: 8px; transition: all 0.4s ease-out 0s;"></i>';
+                    h += '<i class="' + op.icon + '" style="float: right; margin: 8px; transition: all 0.4s ease-out 0s;"></i>';
                     h += text + '</div>';
                     $(target).append(h);
 

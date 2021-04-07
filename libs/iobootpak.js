@@ -39,10 +39,6 @@ var config = init_pak + "/app.json";
 
 document.addEventListener("DOMContentLoaded", function (event) {
 
-    console.log(init_pak);
-
-    console.log(config);
-
     fetch(init_pak + "/index.html")
         .then((response) => response.text())
         .then((html) => {
@@ -54,13 +50,10 @@ document.addEventListener("DOMContentLoaded", function (event) {
                 ioboot.start();
             });
 
-
         })
         .catch((error) => {
             console.warn(error);
         });
 
     //config = init_pak + "/app.json";
-
-    
 });

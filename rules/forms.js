@@ -104,7 +104,9 @@
         instance.panels = new FormPanels(instance);
 
         // Llamamos al constructor
-        instance.init();
+        if (instance.init === undefined) {
+            instance.init();
+        }
 
         // Agregamos algunos metodos basicos, si es que no estan agregados en la clase
         if (instance.prepare === undefined) {

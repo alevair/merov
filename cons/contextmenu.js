@@ -19,8 +19,8 @@
         self.mousein = false;
         self.mousepopin = false;
 
-        self.pars.ops = ioaux.setOrDefault(self.pars.ops, []);
-        self.pars.keys = ioaux.setOrDefault(self.pars.keys, []);
+        self.dat.ops = ioaux.setOrDefault(self.pars.ops, []);
+        self.dat.keys = ioaux.setOrDefault(self.pars.keys, []);
 
         self.eform(ide).on("click", function (e) {
 
@@ -57,16 +57,16 @@
         self.dat.data = data;
     };
 
-    this.options = function (options) {
-        self.pars.ops = options;
+    this.ops = function (options) {
+        self.dat.ops = options;
     };
 
     this.keys = function (keys) {
-        self.pars.keys = keys;
+        self.dat.keys = keys;
     };
 
     this.sels = function (sels) {
-        self.pars.sels = sels;
+        self.dat.sels = sels;
     };
 
     // En el caso de abrir un contextual sobre un elemento dinamico
@@ -101,13 +101,13 @@
             options: []
         };
 
-        for (let l1 = 0; l1 < self.pars.ops.length; l1++) {
-            let op = self.pars.ops[l1];
+        for (let l1 = 0; l1 < self.dat.ops.length; l1++) {
+            let op = self.dat.ops[l1];
 
             let sel = false;
-            if (!isUndefinedOrEmpty(self.pars.sels)) {
-                for (let l3 = 0; l3 < self.pars.sels.length; l3++) {
-                    var idx = self.pars.sels[l3];
+            if (!isUndefinedOrEmpty(self.dat.sels)) {
+                for (let l3 = 0; l3 < self.dat.sels.length; l3++) {
+                    var idx = self.dat.sels[l3];
                     if (idx === l1) {
                         sel = true;
                         break;

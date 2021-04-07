@@ -222,6 +222,15 @@
     };
 };
 
+function getDocumentPPI() {
+    var elem = document.createElement('div');
+    elem.style.width = '1in';
+    document.body.appendChild(elem);
+    var ppi = elem.offsetWidth;
+    document.body.removeChild(elem);
+    return ppi;
+}
+
 function openInNewTab(url) {
     var win = window.open(url, '_blank');
     win.focus();
