@@ -23,10 +23,6 @@
             },
             {
                 "tipo": "css",
-                "source": "css/login.css"
-            },
-            {
-                "tipo": "css",
                 "source": "css/menu.css"
             },
             {
