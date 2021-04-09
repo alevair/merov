@@ -104,7 +104,7 @@
         instance.panels = new FormPanels(instance);
 
         // Llamamos al constructor
-        if (instance.init === undefined) {
+        if (instance.init !== undefined) {
             instance.init();
         }
 
@@ -143,9 +143,11 @@
                 app.forms.enable(instance.idform, valor, message);
             };
         }
+
         if (instance.cons === undefined) {
             instance.cons = {};
         }
+
         if (instance.dat === undefined) {
             instance.dat = {};
         }

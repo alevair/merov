@@ -57,7 +57,7 @@
         instance.controls = new FormControls(instance);
 
         // Llamamos al constructor
-        if (instance.init === undefined) {
+        if (instance.init !== undefined) {
             instance.init();
         }
 
