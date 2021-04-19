@@ -24,11 +24,8 @@
 
     this.load_html = function (url, fdone) {
 
-
-
         var mem = document.createElement("div");
         mem.load(url, function () {
-
             fdone(mem.html());
         });
     };

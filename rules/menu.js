@@ -40,27 +40,30 @@
         self.hamb_abierto = false;
     };
 
-    this.agregarform = function (idform, nombre, imagen = null) {
+    this.agregarform = function (idform, nombre, imagen = null, target = null) {
 
         var opcion = {
             menu: "menuop_" + idform,
             idform: idform,
             nombre: nombre,
-            imagen: imagen
+            imagen: imagen,
+            target: target
         };
         self.dat.forms.push(opcion);
 
+        var tarname = isUndefinedOrEmpty(target) ? "#menu .menu" : target === "config" ? "#menu .config" : "#menu .menu";
+
         // Lo agregamos al frontend
         if (self.dat.forms.length === 1) {
-            $("#menu .menu").append("<h1 id='menu_opcion_tarea' style='border-bottom: #067b90 solid 1px'></h1>");
+            $(tarname).append("<h1 id='menu_opcion_tarea' style='border-bottom: #067b90 solid 1px'></h1>");
         }
 
         if (imagen === null) {
             var h = '<p id="' + opcion.menu + '" >' + nombre + '</p>';
-            $("#menu .menu").append(h);
+            $(tarname).append(h);
         } else {
             var h1 = '<p id="' + opcion.menu + '" ><i class="' + imagen + '"></i>' + nombre + '</p>';
-            $("#menu .menu").append(h1);
+            $(tarname).append(h1);
         }
 
         self.selop(opcion.menu);

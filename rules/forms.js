@@ -180,7 +180,7 @@
             ioaux.load_html(base + template.html + "?ver=" + app.settings.ver, function (html) {
 
                 if (template.menu === "mostrar" && container === null) {
-                    app.menu.agregarform(form.id, template.title, template.img);
+                    app.menu.agregarform(form.id, template.title, template.img, isUndefinedOrEmpty(template.menu_target) ? null : template.menu_target );
                 }
 
                 let clas = template.cssclass !== undefined ? template.cssclass : "form_panel";
@@ -242,10 +242,11 @@
                 }
             }
         }
-
+        /*
         if (app.fulls !== undefined) {
             app.fulls.notify(action, pars);
         }
+        */
     };
 
     this.enable = function (id, val, message) {

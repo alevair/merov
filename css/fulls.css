@@ -32,3 +32,39 @@
 .full_panel {
     text-align: center;
 }
+
+
+@media screen and (max-width: 800px) {
+    .dialogs {
+        margin: auto;
+        width: 100%;
+        height: 500px;
+        font: Arial;
+        font-size: 10pt;
+        color: #303030;
+        display: flex;
+        flex-direction: column;
+    }
+}
+
+@media screen and (min-width: 801px) {
+    .dialogs {
+        margin: auto;
+        font: Arial;
+        font-size: 10pt;
+        color: #303030;
+        display: flex;
+        flex-direction: column;
+    }
+}
+
+
+
+.dialogs > img {
+    margin: auto;
+    display: block;
+}
+
+.dialog_panel {
+    text-align: center;
+}

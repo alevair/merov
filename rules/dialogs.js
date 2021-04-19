@@ -1,13 +1,12 @@
-﻿function RuleFulls() {
+﻿function RuleDialogs() {
     var self = this;
 
-    this.document_ready = function() {
+    this.document_ready = function () {
         self.dat = {
-            fulls: []
-
+            dialogs: []
         };
         self.unique = 0;
-        self.idform = "fulls";
+        self.idform = "dialogs";
     };
 
     this.open = function (formname, pars, fdone) {
@@ -18,24 +17,24 @@
             };
         }
 
-        // Buscamos el template del form
-        var template = app.dat.fulls.get({ name: formname });
+        // Buscamos el template del dialog
+        var template = app.dat.dialogs.get(formname);
         if (template === null) {
-            app.dbox.error.sh("Full no encontrado", formname);
+            app.dbox.error.sh("Dialog no encontrado", formname);
             if (isFunc(fdone)) {
                 callFunc(fdone, null);
             }
             return;
         }
 
-        // Establecemos el id del full
-        var idform = "full_" + template.name;
+        // Establecemos el id del dialog
+        var idform = "dialog_" + template.name;
         if (template.instance === "multiple") {
             if (pars.id > 0) {
-                idform = "full_" + template.name + "_" + pars.id;
+                idform = "dialog_" + template.name + "_" + pars.id;
             } else {
                 pars.id = -1;
-                idform = "full_" + template.name + "_n" + self.unique++;
+                idform = "dialog_" + template.name + "_n" + self.unique++;
             }
         }
         var prev = self.get(idform);
@@ -88,12 +87,12 @@
         }
         if (instance.close === undefined) {
             instance.close = function () {
-                app.fulls.close(instance.idform, instance.pars.backform, null);
+                app.dialogs.close(instance.idform, instance.pars.backform, null);
             };
         }
         if (instance.enable === undefined) {
             instance.enable = function (valor) {
-                app.fulls.enable(instance.idform, valor);
+                app.dialogs.enable(instance.idform, valor);
             };
         }
         if (instance.cons === undefined) {
@@ -103,13 +102,19 @@
             instance.dat = {};
         }
 
+        if (self.dat.dialogs.length === 0) {
+            $('#dialog_mask').fadeIn(0);
+            $('#dialog_mask').fadeTo(0, 0.3);
+            $('#dialogs').show();
+        }
+
         var form = {
             id: idform,
             template: template,
             instance: instance,
             visible: false
         };
-        self.dat.fulls.push(form);
+        self.dat.dialogs.push(form);
 
         if (template.instance === "unica") {
             if (template.global !== undefined) {
@@ -117,12 +122,13 @@
             }
         }
 
+
         self.loading(function () {
 
             ioaux.load_html(template.package.base + template.html + "?ver=" + app.settings.ver, function (html) {
 
                 /* style="display:none" */
-                var h = '<div class="full_panel" id="' + idform + '">' + html + '</div>';
+                var h = '<div class="dialog_panel" id="' + idform + '">' + html + '</div>';
                 self.eform(null).append(h);
 
                 h = '<div id="' + idform + '_mask" class="form_mask"></div>';
@@ -136,50 +142,21 @@
                     if (isFunc(fdone)) {
                         callFunc(fdone, null);
                     }
-                    //self.notify("form.shown", { idform: idform, instance: instance });
+
                 });
             });
         });
-
-        /*
-        return;
-
-
-        self.sh(-1, function () {
-
-            //return;
-            ioaux.load_html(template.package.base + template.html, function (html) {
-
-                if (template.menu === "mostrar") {
-                    app.menu.agregarform(form.id, template.titulo, template.img);
-                }
-
-                var h = '<div class="full_panel" id="' + idform + '" style="display:none">' + html + '</div>';
-                self.eform().append(h);
-
-                instance.prepare();
-                self.sh(idform, function () {
-                    instance.shown(true);
-                    if (isFunc(fdone)) {
-                        callFunc(fdone, null);
-                    }
-                });
-            });
-        });
-        */
     };
 
     this.loading = function (fdone) {
-        for (let l1 = 0; l1 < self.dat.fulls.length; l1++) {
-            let frm = self.dat.fulls[l1];
+        for (let l1 = 0; l1 < self.dat.dialogs.length; l1++) {
+            let frm = self.dat.dialogs[l1];
             self.eform(frm.id).hide();
         }
 
-        //self.eform("full_loading").fadeIn(100, function () {
-            if (isFunc(fdone)) {
-                fdone();
-            }
-        //});
+        if (isFunc(fdone)) {
+            fdone();
+        }
     };
 
     this.enable = function (id, val) {
@@ -200,53 +177,43 @@
             element.remove();
         }
 
-        for (var l1 = 0; l1 < self.dat.fulls.length; l1++) {
-            if (self.dat.fulls[l1].id === id) {
-                var form = self.dat.fulls[l1];
+        for (var l1 = 0; l1 < self.dat.dialogs.length; l1++) {
+            if (self.dat.dialogs[l1].id === id) {
+                var form = self.dat.dialogs[l1];
 
-                self.dat.fulls.splice(l1, 1);
-                if (form.template.menu === "mostrar") {
-                    app.menu.borrarform(form.id);
-                }
-
+                self.dat.dialogs.splice(l1, 1);
                 break;
             }
         }
     };
 
     this.clear = function () {
-        self.dat.fulls = [];
+        self.dat.dialogs = [];
         self.eform().html("");
     };
 
     this.close = function (id, backform, backformalternative) {
 
-        self.destroy(id);
+        let dialog = self.dat.dialogs[self.dat.dialogs.length - 1];
 
-        if (self.exists(backform)) {
-            self.sh(backform, null, true);
-            return backform;
+        self.destroy(dialog.id);
+
+        if (self.dat.dialogs.length > 0) {
+            let next = self.dat.dialogs[self.dat.dialogs.length - 1];
+            self.sh(next.id, null, true);
         } else {
-            if (self.exists(backformalternative)) {
-                self.sh(backformalternative, null, true);
-                return backformalternative;
-            } else {
-                self.sh("homeusuario", null, true);
-                return "homeusuario";
-            }
+            $('#dialogs').hide();
+            $('#dialog_mask').hide();
         }
     };
 
-
     this.sh = function (id, fdone, callshown = false) {
 
-        for (var l1 = 0; l1 < self.dat.fulls.length; l1++) {
-            if (self.dat.fulls[l1].id !== id) {
-                self.eform(self.dat.fulls[l1].id).hide();
+        for (var l1 = 0; l1 < self.dat.dialogs.length; l1++) {
+            if (self.dat.dialogs[l1].id !== id) {
+                self.eform(self.dat.dialogs[l1].id).hide();
             }
         }
-
-        //self.eform("full_loading").hide();
 
         if (id === -1) {
             if (isFunc(fdone)) {
@@ -262,54 +229,34 @@
                     }
 
                     if (callshown) {
-                        let full = self.get(id);
-                        full.instance.shown(false);
+                        let dialog = self.get(id);
+                        dialog.instance.shown(false);
                     }
                 });
-                //app.menu.form_mostrado(id);
             }
         }
     };
 
-    this.notify = function(action, pars) {
-        for (let l1 = 0; l1 < self.dat.fulls.length; l1++) {
-            let full = self.dat.fulls[l1];
+    this.notify = function (action, pars) {
+        for (let l1 = 0; l1 < self.dat.dialogs.length; l1++) {
+            let dialog = self.dat.dialogs[l1];
 
-            //if (isFunc(full.instance.notify)) {
-                full.instance.notify(action, pars);
-            //}
+            dialog.instance.notify(action, pars);
         }
     };
-
-    /*
-    this.show = function (id) {
-
-        for (var l1 = 0; l1 < self.fulls.length; l1++) {
-            var full = self.fulls[l1];
-
-            if (id !== full.id) {
-                self.eform(full.id).hide();
-            }
-        }
-
-        self.eform(id).fadeIn(300);
-
-        app.menu.form_mostrado(id);
-    };
-    */
 
     this.get = function (id) {
-        for (var l1 = 0; l1 < self.dat.fulls.length; l1++) {
-            if (self.dat.fulls[l1].id === id) {
-                return self.dat.fulls[l1];
+        for (var l1 = 0; l1 < self.dat.dialogs.length; l1++) {
+            if (self.dat.dialogs[l1].id === id) {
+                return self.dat.dialogs[l1];
             }
         }
         return null;
     };
 
     this.index = function (id) {
-        for (var l1 = 0; l1 < self.dat.fulls.length; l1++) {
-            if (self.dat.fulls[l1].id === id) {
+        for (var l1 = 0; l1 < self.dat.dialogs.length; l1++) {
+            if (self.dat.dialogs[l1].id === id) {
                 return l1;
             }
         }

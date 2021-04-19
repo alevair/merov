@@ -1,6 +1,8 @@
 ﻿function RuleDialogWait() {
     var self = this;
 
+    console.log("RuleDialogWait");
+
     this.document_ready = function () {
 
     };

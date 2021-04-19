@@ -87,6 +87,10 @@
             },
             {
                 "tipo": "js",
+                "source": "rules/dialogs.js"
+            },
+            {
+                "tipo": "js",
                 "source": "rules/menu.js"
             },
             {
@@ -170,6 +174,10 @@
             {
                 "name": "menu",
                 "class": "RuleMenu"
+            },
+            {
+                "name": "dialogs",
+                "class": "RuleDialogs"
             },
             {
                 "name": "dbox.wait",

@@ -331,9 +331,19 @@
                                 return null;
                             }
                         };
+                        app.dat.dialogs = {
+                            tems: [],
+                            get: function (name) {
+                                for (let l1 = 0; l1 < app.dat.dialogs.tems.length; l1++) {
+                                    if (app.dat.dialogs.tems[l1].name === name) {
+                                        return app.dat.dialogs.tems[l1];
+                                    }
+                                }
+                                return null;
+                            }
+                        };
 
-
-                        // Iniciamos y unificamos forms, fulls, controls y menues
+                        // Iniciamos y unificamos forms, fulls, dialogs, controls y menues
                         for (let l1 = 0; l1 < app.settings.packages.length; l1++) {
                             let pak = app.settings.packages[l1];
 
@@ -350,6 +360,13 @@
                                     let full = pak.fulls[l1];
                                     full.package = pak;
                                     app.dat.fulls.tems.push(full);
+                                }
+                            }
+                            if (!isUndefinedOrEmpty(pak.dialogs)) {
+                                for (let l1 = 0; l1 < pak.dialogs.length; l1++) {
+                                    let full = pak.dialogs[l1];
+                                    full.package = pak;
+                                    app.dat.dialogs.tems.push(full);
                                 }
                             }
 
@@ -478,6 +495,7 @@
                         ioboot.get_json(pak.base + pak.sets.forms + "?ver=" + app.settings.ver, function (json) {
                             pak.forms = json.forms;
                             pak.fulls = json.fulls;
+                            pak.dialogs = json.dialogs;
                             ioboot.load_pakdef(pak, index + 1, fdone);
                         });
                     } else {
