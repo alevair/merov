@@ -227,26 +227,8 @@
 
         for (let l1 = 0; l1 < self.dat.forms.length; l1++) {
             let form = self.dat.forms[l1];
-
-            //if (isFunc(form.instance.notify)) {
-                form.instance.notify(action, pars);
-            //}
+            form.instance.notify(action, pars);
         }
-
-        for (let l1 = 0; l1 < app.rules.length; l1++) {
-            let rule = app.rules[l1];
-
-            if (rule !== self) {
-                if (isFunc(rule.notify)) {
-                    rule.notify(action, pars);
-                }
-            }
-        }
-        /*
-        if (app.fulls !== undefined) {
-            app.fulls.notify(action, pars);
-        }
-        */
     };
 
     this.enable = function (id, val, message) {
@@ -302,7 +284,7 @@
 
         self.destroy(id);
 
-        self.notify("form.closed", { idform: id, instance: form.instance });
+        app.notify.send("form.closed", { idform: id, instance: form.instance });
 
         if (self.exists(backform, form.target)) {
             self.sh(backform, null, true);
@@ -382,7 +364,7 @@
                 }
 
                 let form = self.get(id);
-                self.notify("form.shown", { idform: id, instance: form.instance });
+                app.notify.send("form.shown", { idform: id, instance: form.instance });
 
                 if (callshown) {
                     form.instance.shown(false);

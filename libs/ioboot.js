@@ -343,6 +343,18 @@
                             }
                         };
 
+                        app.notify = {
+                            send: function (action, pars) {
+                                for (let l1 = 0; l1 < app.rules.length; l1++) {
+                                    let rule = app.rules[l1];
+
+                                    if (isFunc(rule.notify)) {
+                                        rule.notify(action, pars);
+                                    }
+                                }
+                            }
+                        };
+
                         // Iniciamos y unificamos forms, fulls, dialogs, controls y menues
                         for (let l1 = 0; l1 < app.settings.packages.length; l1++) {
                             let pak = app.settings.packages[l1];

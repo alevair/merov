@@ -119,7 +119,9 @@
 
         self.loading(function () {
 
-            ioaux.load_html(template.package.base + template.html + "?ver=" + app.settings.ver, function (html) {
+            let base = template.package !== undefined ? template.package.base : "";
+
+            ioaux.load_html(base + template.html + "?ver=" + app.settings.ver, function (html) {
 
                 /* style="display:none" */
                 var h = '<div class="full_panel" id="' + idform + '">' + html + '</div>';
@@ -140,6 +142,8 @@
                 });
             });
         });
+
+        return form;
 
         /*
         return;
@@ -221,7 +225,15 @@
 
     this.close = function (id, backform, backformalternative) {
 
+        var full = self.get(id);
+
+        if (full === null) {
+            return;
+        }
+
         self.destroy(id);
+        
+        app.notify.send("full.closed", { idform: id, instance: full.instance });
 
         if (self.exists(backform)) {
             self.sh(backform, null, true);
@@ -261,8 +273,10 @@
                         fdone();
                     }
 
+                    let full = self.get(id);
+                    app.notify.send("full.shown", { idform: id, instance: full.instance });
+
                     if (callshown) {
-                        let full = self.get(id);
                         full.instance.shown(false);
                     }
                 });
@@ -271,13 +285,11 @@
         }
     };
 
-    this.notify = function(action, pars) {
+    this.notify = function (action, pars) {
+
         for (let l1 = 0; l1 < self.dat.fulls.length; l1++) {
             let full = self.dat.fulls[l1];
-
-            //if (isFunc(full.instance.notify)) {
-                full.instance.notify(action, pars);
-            //}
+            full.instance.notify(action, pars);
         }
     };
 

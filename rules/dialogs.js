@@ -87,7 +87,7 @@
         }
         if (instance.close === undefined) {
             instance.close = function () {
-                app.dialogs.close(instance.idform, instance.pars.backform, null);
+                app.dialogs.close(instance.pars.backform, null);
             };
         }
         if (instance.enable === undefined) {
@@ -192,11 +192,13 @@
         self.eform().html("");
     };
 
-    this.close = function (id, backform, backformalternative) {
+    this.close = function (backform, backformalternative) {
 
         let dialog = self.dat.dialogs[self.dat.dialogs.length - 1];
 
         self.destroy(dialog.id);
+
+        app.notify.send("dialog.closed", { idform: dialog.id, instance: dialog.instance });
 
         if (self.dat.dialogs.length > 0) {
             let next = self.dat.dialogs[self.dat.dialogs.length - 1];
@@ -228,8 +230,10 @@
                         fdone();
                     }
 
+                    let dialog = self.get(id);
+                    app.notify.send("dialog.shown", { idform: id, instance: dialog.instance });
+
                     if (callshown) {
-                        let dialog = self.get(id);
                         dialog.instance.shown(false);
                     }
                 });
@@ -238,9 +242,9 @@
     };
 
     this.notify = function (action, pars) {
+
         for (let l1 = 0; l1 < self.dat.dialogs.length; l1++) {
             let dialog = self.dat.dialogs[l1];
-
             dialog.instance.notify(action, pars);
         }
     };

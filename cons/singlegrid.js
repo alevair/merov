@@ -7,6 +7,14 @@
             data: [],
             groups: null
         };
+
+        /*
+        for (var l1 = 0; l1 < self.pars.columns.length; l1++) {
+            let col = self.pars.columns[l1];
+
+            col.field = isUndefinedOrEmpty(col.field) ? "" : col.field.toLowerCase();
+        }
+        */
     };
 
     this.render = function (apply) {

@@ -51,6 +51,18 @@
         });
     };
 
+    this.removeControl = function (ide) {
+        for (let l1 = 0; l1 < self.cons.length; l1++) {
+            let con = self.cons[l1];
+
+            if (con.ide === ide) {
+                self.eform(ide).remove();
+                self.cons.splice(l1, 1);
+                break;
+            }
+        }
+    };
+
     // Setea o recupera el valor de una propiedad de un control
     this.prop = function (ide, prop, value ) {
         var con = self.get(ide);
