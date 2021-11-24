@@ -215,13 +215,15 @@
             op.abierto = !op.abierto;
             self.eform("menuop_" + op.name + " i").css("transform", op.abierto ? "rotate(180deg)" : "rotate(0deg)");
 
-            for (var l2 = 0; l2 < op.options.length; l2++) {
-                var op1 = op.options[l2];
-                if (op.abierto) {
-                    self.eform("menuop_" + op1.name).show();
-                } else {
-                    self.eform("menuop_" + op1.name).hide();
-                }
+            if(op.options) {
+                for (var l2 = 0; l2 < op.options.length; l2++) {
+                    var op1 = op.options[l2];
+                    if (op.abierto) {
+                        self.eform("menuop_" + op1.name).show();
+                    } else {
+                        self.eform("menuop_" + op1.name).hide();
+                    }
+                }    
             }
         }
     };
@@ -309,10 +311,12 @@
             self.eform(ide).removeClass("sel");
 
             if (op.element === 's') {
-                for (let l2 = 0; l2 < op.options.length; l2++) {
-                    let sop = op.options[l2];
-                    let ide = "menuop_" + sop.name;
-                    self.eform(ide).removeClass("sel");
+                if(op.options) {
+                    for (let l2 = 0; l2 < op.options.length; l2++) {
+                        let sop = op.options[l2];
+                        let ide = "menuop_" + sop.name;
+                        self.eform(ide).removeClass("sel");
+                    }    
                 }
             }
         }

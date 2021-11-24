@@ -33,13 +33,13 @@
         if (apply) {
             self.eform(self.pars.ide).replaceWith(res);
 
-            if (isFunc(self.pars.onclick)) {
+            //if (isFunc(self.pars.onclick)) {
                 self.eform(self.pars.ide).on("click", { self: self }, function (e) {
                     self.dat.index = self.dat.index + 1 > self.pars.ops.length - 1 ? 0 : self.dat.index + 1;
                     self.render(true);
                     self.click();
                 });
-            }
+            //}
         }
 
         return res;

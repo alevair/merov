@@ -220,6 +220,10 @@
         xmlhttp.open("GET", url, true);
         xmlhttp.send();
     };
+
+    this.getExt = function(filepath) {
+        return filepath.split("?")[0].split("#")[0].split('.').pop();
+    }
 };
 
 function getDocumentPPI() {

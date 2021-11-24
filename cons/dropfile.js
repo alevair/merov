@@ -70,6 +70,8 @@
                     }
                 }
 
+                self.chekvalid(files);
+
                 if (isFunc(self.pars.onselect)) {
                     self.pars.onselect(self, files);
                 }
@@ -82,6 +84,10 @@
         }
 
         return res;
+    };
+
+    this.chekvalid = function (files) {
+
     };
 
     this.eform = function (id) {

@@ -6,6 +6,7 @@
         self.idrpan = "rpan_contenedor";
 
         self.dat = {
+            order: [],
             forms: [],
             unique: 0,
             targets: [
@@ -28,22 +29,56 @@
         };
     };
 
+    this.setorder = (idform) => {
+        let form = self.get(idform);
+        if(form) {
+            if(form.target === "forms") {
+                self.delorder(idform);
+                self.dat.order.push(idform);    
+            }    
+        }
+    }
+
+    this.delorder = (idform) => {
+        const index = self.dat.order.findIndex(elem => elem === idform);
+        if(index > -1) {
+            self.dat.order.splice(index, 1);
+        }
+    }
+
+    this.getorder = () => {
+
+        do {
+            let id = self.dat.order[self.dat.order.length - 1];
+            let form = self.get(id);
+            if(form) {
+                return id;
+            } 
+            self.dat.order.splice(self.dat.order.length - 1, 1);
+
+        } while(self.dat.order.length > 0);
+
+        return self.dat.forms[self.dat.forms.length - 1].id;
+    }
+
     // Inicia un nuevo formulario, o abre uno existente
     this.open = function (formname, pars, fdone) {
 
         if (pars === null || pars === undefined) {
-            app.dbox.error.sh("No especifico parametros", formname);
+            app.dbox.error.dialog({ title: "No especifico parametros", text: formname });
             return;
         }
 
         // Buscamos el template del form
         var template = app.dat.forms.get({ name: formname });
         if (template === null) {
-            app.dbox.error.sh("Form no encontrado", formname);
-            if (isFunc(fdone)) {
-                callFunc(fdone, null);
-            }
-            return;
+            app.dbox.error.dialog({ title: "Form no encontrado", text: formname })
+            .then(() => {
+                if (isFunc(fdone)) {
+                    callFunc(fdone, null);
+                }
+                return;    
+            }).catch();
         }
 
         // Chequeamos que tengan permisos para acceder al formulario
@@ -62,11 +97,14 @@
         }
 
         if (salir) {
-            app.dbox.error.sh("Error de acceso", "No tiene permisos para acceder a esta función: " + formname);
-            if (isFunc(fdone)) {
-                callFunc(fdone, null);
-            }
-            return;
+            app.dbox.error.dialog({ title: "Form no encontrado", text: formname })
+            .then(() => {
+                app.dbox.error.sh("Error de acceso", "No tiene permisos para acceder a esta función: " + formname);
+                if (isFunc(fdone)) {
+                    callFunc(fdone, null);
+                }
+                return;    
+            }).catch();
         }
 
         // Establecemos el id del formulario
@@ -94,6 +132,7 @@
         // Cargamos el id del formulario entre los parametros
         //pars.idform = idform;
         var instance = newFunc(template.class, pars);
+        instance.pars = pars;
         instance.idform = idform;
         instance.pars.tem = template;
 
@@ -110,36 +149,36 @@
 
         // Agregamos algunos metodos basicos, si es que no estan agregados en la clase
         if (instance.prepare === undefined) {
-            instance.prepare = function () { };
+            instance.prepare = () => { };
         }
         if (instance.shown === undefined) {
-            instance.shown = function () { };
+            instance.shown =  () => { };
         }
         if (instance.notify === undefined) {
-            instance.notify = function (action, pars) { };
+            instance.notify = (action, pars) => { };
         }
         if (instance.eform === undefined) {
-            instance.eform = function (id) {
+            instance.eform = (id) => {
                 return RuleBase.eform(instance.idform, id);
             };
         }
         if (instance.setvars === undefined) {
-            instance.setvars = function (vars, prep, post) {
+            instance.setvars = (vars, prep, post) => {
                 RuleBase.setvars(instance.idform, vars, prep, post);
             };
         }
         if (instance.getvars === undefined) {
-            instance.getvars = function (vars, prep, post) {
+            instance.getvars = (vars, prep, post) => {
                 return RuleBase.getvars(instance.idform, vars, prep, post);
             };
         }
         if (instance.close === undefined) {
-            instance.close = function () {
+            instance.close = () => {
                 app.forms.close(instance.idform, instance.pars.backform, null);
             };
         }
         if (instance.enable === undefined) {
-            instance.enable = function (valor, message) {
+            instance.enable = (valor, message) => {
                 app.forms.enable(instance.idform, valor, message);
             };
         }
@@ -150,6 +189,20 @@
 
         if (instance.dat === undefined) {
             instance.dat = {};
+        }
+
+        if(instance.send === undefined) {
+            instance.send = (action, pars) => {
+                self.notify(action, pars);
+            };
+        }
+
+        if(instance.ld === undefined) {
+            instance.ld = () => {
+                return new Promise((resolve, rejected) => {
+                    resolve();
+                });    
+            }
         }
 
         var form = {
@@ -206,17 +259,35 @@
 
                 // var h = $('#' + self.pars.def.template).html();
 
-
+                // Si la definicion tiene controles, los agregamos
+                if (template.controls !== undefined) {
+                    if (Array.isArray(template.controls)) {
+                        instance.controls.add(template.controls);
+                    }
+                }
 
                 instance.prepare();
                 self.sh(idform, function () {
-                    instance.enable(pars.enable === undefined ? true : pars.enable);
 
-                    instance.shown(true, null);
+                    instance.ld()
+                    .then(() => {
 
-                    if (isFunc(fdone)) {
-                        callFunc(fdone, null);
-                    }
+                        instance.enable(pars.enable === undefined ? true : pars.enable);
+
+                        instance.shown(true, null);
+    
+                        if (isFunc(fdone)) {
+                            callFunc(fdone, null);
+                        }    
+
+                    })
+                    .catch((err) => {
+                        app.dbox.error.dialog({ title: "Error al iniciar formulario", text: err })
+                        .then(() => {
+                            instance.close();
+                        }).catch();
+                    });
+
                     //self.notify("form.shown", { idform: idform, instance: instance });
                 });
             });
@@ -286,6 +357,20 @@
 
         app.notify.send("form.closed", { idform: id, instance: form.instance });
 
+        self.delorder(id);
+
+        let next = self.getorder();
+        if(backform) {
+            let back = self.get(backform);
+            if(back) {
+                next = backform;
+            }
+        }
+
+        self.sh(next, null, true);
+
+        return;
+
         if (self.exists(backform, form.target)) {
             self.sh(backform, null, true);
             return backform;
@@ -347,13 +432,15 @@
 
 
         let form = self.get(id);
-        if (!isUndefinedOrEmpty(form.dialog)) {
-            id = form.dialog;
-            form = self.get(id);
-
+        if(form){
             if (!isUndefinedOrEmpty(form.dialog)) {
                 id = form.dialog;
-            }
+                form = self.get(id);
+    
+                if (!isUndefinedOrEmpty(form.dialog)) {
+                    id = form.dialog;
+                }
+            }    
         }
 
         var fr = self.eform(target, id);
@@ -372,6 +459,8 @@
             });
             app.menu.form_mostrado(id);
         }
+
+        self.setorder(id);
     };
 
     this.get = function (id) {

@@ -1,8 +1,6 @@
 ﻿function RuleDialogWait() {
     var self = this;
 
-    console.log("RuleDialogWait");
-
     this.document_ready = function () {
 
     };
@@ -24,6 +22,9 @@
     this.close = function () {
         self.eform('mask').hide();
         self.eform('dwait').hide();
+
+        Swal.close();
+
     };
 
     this.eform = function (id) {
@@ -31,6 +32,21 @@
     };
 
     this.document_ready();
+
+    this.dialog = (pars) => {
+
+        return new Promise((resolve, reject) => {
+            Swal.fire({
+                allowEscapeKey: false,
+                allowOutsideClick: false,
+                showConfirmButton: false,
+                didOpen: () => {
+                    Swal.showLoading();
+                },                
+                ... pars
+            });
+        });
+    }
 }
 
 
@@ -73,6 +89,19 @@ function RuleDialogError() {
     this.eform = function (id) {
         return $('#' + id);
     };
+
+    this.dialog = function(pars) {
+
+        return new Promise((resolve, reject) => {
+            Swal.fire({
+                icon: "error",
+                confirmButtonText: "Aceptar",
+                ... pars
+            }).then(() => {
+                resolve();
+            });
+        });
+    }
 }
 
 
@@ -137,6 +166,26 @@ function RuleDialogQuestion() {
     this.eform = function (id) {
         return $('#' + id);
     };
+
+    this.dialog = function(pars) {
+
+        return new Promise((resolve, reject) => {
+            Swal.fire({
+                icon: "warning",
+                confirmButtonText: "Aceptar",
+                showCancelButton: true,
+                cancelButtonText: "Cancelar",
+                allowOutsideClick: false,
+                ... pars
+            }).then((result) => {
+                if(result.isConfirmed) {
+                    resolve();
+                } else {
+                    reject();
+                }
+            });
+        });
+    }
 }
 
 function RuleDialogInput() {
@@ -181,6 +230,28 @@ function RuleDialogInput() {
     this.eform = function (id) {
         return $('#' + id);
     };
+
+    this.dialog = (pars) => {
+
+        return new Promise((resolve, reject) => {
+            Swal.fire({
+                input: "text",
+                confirmButtonText: "Aceptar",
+                showCancelButton: true,
+                cancelButtonText: "Cancelar",                
+                ... pars
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    resolve(result.value);
+                } else {
+                    reject();
+                }
+            });
+        });
+    }
+
+    
+
 }
 
 function RuleDialogInfo() {
@@ -220,4 +291,45 @@ function RuleDialogInfo() {
     this.eform = function (id) {
         return $('#' + id);
     };
+
+    this.dialog = (pars) => {
+
+        return new Promise((resolve, reject) => {
+            Swal.fire({
+                icon: "info",
+                confirmButtonText: "Aceptar",
+                ... pars
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    resolve(result.value);
+                } else {
+                    reject();
+                }
+            });
+        });
+    }
+}
+
+function RuleDialogWarning() {
+    var self = this;
+
+    this.document_ready = () => {
+    };
+    
+    this.dialog = (pars) => {
+
+        return new Promise((resolve, reject) => {
+            Swal.fire({
+                icon: "warning",
+                confirmButtonText: "Aceptar",
+                ... pars
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    resolve(result.value);
+                } else {
+                    reject();
+                }
+            });
+        });
+    }
 }

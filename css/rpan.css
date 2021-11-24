@@ -15,16 +15,36 @@
         cursor: w-resize;
     }
 
-.rpan {
-    width: 340px;
-    min-width: 120px;
-    background-color: #ffffff;
-    min-width: 120px;
-    order: 5;
-    display: block;
-    padding: 4px;
-    z-index: 100;
+
+
+@media screen and (max-width: 800px) {
+    .rpan {
+        width: 100%;
+        min-width: 120px;
+        background-color: #ffffff;
+        min-width: 120px;
+        order: 5;
+        display: block;
+        padding: 4px;
+        z-index: 100;
+    }
 }
+
+@media screen and (min-width: 801px) {
+    .rpan {
+        width: 340px;
+        min-width: 120px;
+        background-color: #ffffff;
+        min-width: 120px;
+        order: 5;
+        display: block;
+        padding: 4px;
+        z-index: 100;
+    }
+}
+
+
+
 
 .rpanform {
     display: table;

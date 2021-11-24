@@ -55,6 +55,10 @@
             },
             {
                 "tipo": "js",
+                "source": "libs/sweetalert2.all.min.js"
+            },
+            {
+                "tipo": "js",
                 "source": "rules/ioserver.js"
             },
             {
@@ -198,6 +202,10 @@
             {
                 "name": "dbox.info",
                 "class": "RuleDialogInfo"
+            },
+            {
+                "name": "dbox.warning",
+                "class": "RuleDialogWarning"
             }
         ],
         "main": ""

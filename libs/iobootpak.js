@@ -43,7 +43,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
             document.write(html);
             document.close();
 
-            iobootpak.load_js("merov/libs/ioboot.js", function () {
+            iobootpak.load_js("merov/libs/ioboot.js" + "?dtime=" + (new Date()).getTime(), function () {
                 ioboot.start();
             });
 

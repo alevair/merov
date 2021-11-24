@@ -1,0 +1,43 @@
+{
+    "langs":[
+        {
+            "lang": "es",
+            "forms": [
+                {
+                    "name":"formdoc",
+                    "btn":[
+                        {
+                            "ide":"btn_aceptar",
+                            "text":"Aceptar"
+                        },
+                        {
+                            "name":"cancelar",
+                            "text":"Cancelar"
+                        }
+                    ],
+                    "lbl":[
+                        
+                    ]
+                }
+            ],
+            "controls":[
+                {
+                    "name":"button",
+                    "text":"Aceptar"
+                }
+            ],
+            "services":[
+                {
+                    "name": ""
+                }
+            ],
+            "err":[
+                {
+                    "name": "no_sesion",
+                    "code": "1",
+                    "text": "No existe sesión"
+                }
+            ]        
+        }
+    ]
+}

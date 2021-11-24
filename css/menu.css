@@ -21,18 +21,17 @@
 
         .menu > section > p {
             font-size: 12pt;
-            font-weight: 600;
-            height: 34px;
-            line-height: 34px;
+            font-weight: 100;
             overflow: hidden;
             padding-left: 10px;
             white-space: nowrap;
-            -moz-user-select: none;
-            -ms-user-select: none;
-            -webkit-user-select: none;
             user-select: none;
             margin: 0px;
             text-overflow: ellipsis;
+            padding: 12px 0px 12px 10px;
+            color: #000000aa;
+            border-radius: 2px;
+            font-weight: 600;
         }
 
         .menu > section > .sub {
@@ -46,9 +45,10 @@
             -ms-user-select: none;
             -webkit-user-select: none;
             user-select: none;
-            margin: 0px;
+            margin: auto 0px;
             color: var(--fore-active); /*#067b90;*/
             text-overflow: ellipsis;
+            font-weight: 600;
         }
 }
 
@@ -74,18 +74,14 @@
 
         .menu > section > p {
             font-size: 10pt;
-            font-weight: 600;
-            height: 32px;
-            line-height: 32px;
+            font-weight: 100;
             overflow: hidden;
-            padding-left: 10px;
             white-space: nowrap;
-            -moz-user-select: none;
-            -ms-user-select: none;
-            -webkit-user-select: none;
             user-select: none;
-            margin: 0px;
+            margin: auto 0px;
             text-overflow: ellipsis;
+            padding: 10px 4px 10px 8px;
+            color: #000000aa;
         }
 
         .menu > section > .sub {
@@ -144,7 +140,7 @@
 
 .menu > section > p > i {
     font-size: 12pt;
-    margin: 5px 10px 5px 5px;
+    margin: 0px 10px 0px 5px;
 }
 
 .menu > section > .sel {

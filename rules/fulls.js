@@ -50,6 +50,7 @@
         }
 
         var instance = newFunc(template.class, pars);
+        instance.pars = pars;
         instance.idform = idform;
         instance.pars.tem = template;
 
@@ -130,6 +131,13 @@
                 h = '<div id="' + idform + '_mask" class="form_mask"></div>';
                 self.eform(idform).append(h);
 
+                // Si la definicion tiene controles, los agregamos
+                if (template.controls !== undefined) {
+                    if (Array.isArray(template.controls)) {
+                        instance.controls.add(template.controls);
+                    }
+                }
+
                 instance.prepare();
                 self.sh(idform, function () {
                     instance.shown(true, null);
@@ -138,6 +146,7 @@
                     if (isFunc(fdone)) {
                         callFunc(fdone, null);
                     }
+
                     //self.notify("form.shown", { idform: idform, instance: instance });
                 });
             });

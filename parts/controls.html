@@ -55,7 +55,9 @@
         {{#image}}
         <i class="{{image}}"></i>
         {{/image}}
-        {{#sep}}<span style="width:8px">&nbsp;</span>{{/sep}}
+        <!--
+           {{#sep}}<span style="width:8px">&nbsp;</span>{{/sep}} 
+        -->
         <span id="{{id}}_text">{{text}}</span>
     </div>
     {{/visible}}
@@ -64,7 +66,11 @@
 
 <template id="control-link">
     {{#visible}}
-    <a id="{{id}}" class="link">{{text}}</a>
+    <div>
+        <span style="display:inline-block">
+            <a id="{{id}}" class="link">{{text}}</a>
+        </span>
+    </div>
     {{/visible}}
 </template>
 
@@ -142,7 +148,9 @@
         {{#image}}
         <i class="{{image}}"></i>
         {{/image}}
-        {{#sep}}<span style="width:8px">&nbsp;</span>{{/sep}}
+        <!--
+        {{#sep}}<span style="width:8px">&nbsp;</span>{{/sep}}    
+        -->
         <span>{{text}}</span>
     </div>
     {{/visible}}

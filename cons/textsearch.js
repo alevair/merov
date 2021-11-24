@@ -95,7 +95,9 @@
 
     this.select = function () {
         if (self.pars.chip) {
-            self.chip({ text: self.dat.filter, filter: "" });
+            if(self.dat.filter !== "") {
+                self.chip({ text: self.dat.filter, filter: "" });
+            }
         } else {
             self.dat.prevfilter = self.dat.filter;
         }

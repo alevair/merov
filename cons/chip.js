@@ -33,11 +33,11 @@
         if (apply) {
             self.eform(self.pars.ide).replaceWith(res);
 
-            if (isFunc(self.pars.onclick)) {
+            //if (isFunc(self.pars.onclick)) {
                 self.eform(self.pars.ide).on("click", { self: self }, function (e) {
                     self.click();
                 });
-            }
+            //}
         }
 
         return res;
